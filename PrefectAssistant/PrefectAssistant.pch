@@ -1,0 +1,17 @@
+//
+//  PrefectAssistant.pch
+//  PrefectAssistant
+//
+//  Created by HelloWorld on 16/3/14.
+//  Copyright © 2016年 HelloWorld. All rights reserved.
+//
+
+#ifndef PrefectAssistant_pch
+#define PrefectAssistant_pch
+#ifdef __OBJC__
+
+
+
+
+#endif
+#endif /* PrefectAssistant_pch */
