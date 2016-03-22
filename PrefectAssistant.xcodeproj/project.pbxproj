@@ -7,29 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8202380F1C96B78800A8B12D /* YTConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 8202380E1C96B78800A8B12D /* YTConstant.m */; };
 		821E6EC91C96663F006F49D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 821E6EC81C96663F006F49D5 /* main.m */; };
 		821E6ECC1C96663F006F49D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 821E6ECB1C96663F006F49D5 /* AppDelegate.m */; };
-		821E6ECF1C96663F006F49D5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 821E6ECE1C96663F006F49D5 /* ViewController.m */; };
-		821E6ED21C96663F006F49D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821E6ED01C96663F006F49D5 /* Main.storyboard */; };
 		821E6ED41C96663F006F49D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 821E6ED31C96663F006F49D5 /* Assets.xcassets */; };
 		821E6ED71C96663F006F49D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821E6ED51C96663F006F49D5 /* LaunchScreen.storyboard */; };
+		823E85791C9F9F8B00A3BCA0 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 823E85781C9F9F8B00A3BCA0 /* UIView+Extension.m */; };
+		8282F9B61CA12776008DC02A /* YTHTTPTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8282F9B51CA12776008DC02A /* YTHTTPTool.m */; };
+		8282F9B91CA12810008DC02A /* YTHTTPFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8282F9B81CA12810008DC02A /* YTHTTPFile.m */; };
+		8282F9BD1CA12A46008DC02A /* YTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8282F9BC1CA12A46008DC02A /* YTAlertView.m */; };
+		8282F9C51CA13557008DC02A /* YTCookBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8282F9C41CA13557008DC02A /* YTCookBookController.m */; };
+		82DA21AD1C9BA3CF00108B39 /* YTHomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DA21AA1C9BA3CF00108B39 /* YTHomePageController.m */; };
+		82DA21B01C9BA3EB00108B39 /* YTRoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DA21AF1C9BA3EB00108B39 /* YTRoundView.m */; };
+		82DA21B51C9BA48B00108B39 /* domeImage0.png in Resources */ = {isa = PBXBuildFile; fileRef = 82DA21B11C9BA48B00108B39 /* domeImage0.png */; };
+		82DA21B61C9BA48B00108B39 /* domeImage1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82DA21B21C9BA48B00108B39 /* domeImage1.jpg */; };
+		82DA21B71C9BA48B00108B39 /* domeImage2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82DA21B31C9BA48B00108B39 /* domeImage2.jpg */; };
+		82DA21B81C9BA48B00108B39 /* domeImage3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82DA21B41C9BA48B00108B39 /* domeImage3.jpg */; };
+		82DA21BB1C9BAC8B00108B39 /* YTModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DA21BA1C9BAC8B00108B39 /* YTModuleView.m */; };
 		E013FCF70B6C868FE36D82FC /* libPods-PrefectAssistant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1CBC27BB5C2BF00192F8D53 /* libPods-PrefectAssistant.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		268972601F73C73AE7749CF5 /* Pods-PrefectAssistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrefectAssistant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PrefectAssistant/Pods-PrefectAssistant.debug.xcconfig"; sourceTree = "<group>"; };
 		6629D48C0928CDDD169E63AE /* Pods-PrefectAssistant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrefectAssistant.release.xcconfig"; path = "Pods/Target Support Files/Pods-PrefectAssistant/Pods-PrefectAssistant.release.xcconfig"; sourceTree = "<group>"; };
+		8202380C1C96B69100A8B12D /* YTMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMacroDefine.h; sourceTree = "<group>"; };
+		8202380D1C96B78800A8B12D /* YTConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTConstant.h; sourceTree = "<group>"; };
+		8202380E1C96B78800A8B12D /* YTConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTConstant.m; sourceTree = "<group>"; };
 		821E6EC41C96663E006F49D5 /* PrefectAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrefectAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		821E6EC81C96663F006F49D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		821E6ECA1C96663F006F49D5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../AppDelegate.h; sourceTree = "<group>"; };
-		821E6ECB1C96663F006F49D5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../AppDelegate.m; sourceTree = "<group>"; };
-		821E6ECD1C96663F006F49D5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		821E6ECE1C96663F006F49D5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		821E6ED11C96663F006F49D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		821E6ECA1C96663F006F49D5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		821E6ECB1C96663F006F49D5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		821E6ED31C96663F006F49D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		821E6ED61C96663F006F49D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		821E6ED81C96663F006F49D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		821E6EE11C969D54006F49D5 /* PrefectAssistant.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefectAssistant.pch; sourceTree = "<group>"; };
+		823E85771C9F9F8B00A3BCA0 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		823E85781C9F9F8B00A3BCA0 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		8282F9B41CA12776008DC02A /* YTHTTPTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTHTTPTool.h; sourceTree = "<group>"; };
+		8282F9B51CA12776008DC02A /* YTHTTPTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTHTTPTool.m; sourceTree = "<group>"; };
+		8282F9B71CA12810008DC02A /* YTHTTPFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTHTTPFile.h; sourceTree = "<group>"; };
+		8282F9B81CA12810008DC02A /* YTHTTPFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTHTTPFile.m; sourceTree = "<group>"; };
+		8282F9BB1CA12A46008DC02A /* YTAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAlertView.h; sourceTree = "<group>"; };
+		8282F9BC1CA12A46008DC02A /* YTAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAlertView.m; sourceTree = "<group>"; };
+		8282F9C31CA13557008DC02A /* YTCookBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCookBookController.h; sourceTree = "<group>"; };
+		8282F9C41CA13557008DC02A /* YTCookBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCookBookController.m; sourceTree = "<group>"; };
+		82DA21A91C9BA3CF00108B39 /* YTHomePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTHomePageController.h; sourceTree = "<group>"; };
+		82DA21AA1C9BA3CF00108B39 /* YTHomePageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTHomePageController.m; sourceTree = "<group>"; };
+		82DA21AE1C9BA3EB00108B39 /* YTRoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTRoundView.h; sourceTree = "<group>"; };
+		82DA21AF1C9BA3EB00108B39 /* YTRoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTRoundView.m; sourceTree = "<group>"; };
+		82DA21B11C9BA48B00108B39 /* domeImage0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = domeImage0.png; sourceTree = "<group>"; };
+		82DA21B21C9BA48B00108B39 /* domeImage1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = domeImage1.jpg; sourceTree = "<group>"; };
+		82DA21B31C9BA48B00108B39 /* domeImage2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = domeImage2.jpg; sourceTree = "<group>"; };
+		82DA21B41C9BA48B00108B39 /* domeImage3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = domeImage3.jpg; sourceTree = "<group>"; };
+		82DA21B91C9BAC8B00108B39 /* YTModuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTModuleView.h; sourceTree = "<group>"; };
+		82DA21BA1C9BAC8B00108B39 /* YTModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTModuleView.m; sourceTree = "<group>"; };
 		C1CBC27BB5C2BF00192F8D53 /* libPods-PrefectAssistant.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PrefectAssistant.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -54,6 +85,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		820238081C96B5B500A8B12D /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				8202380C1C96B69100A8B12D /* YTMacroDefine.h */,
+				8202380D1C96B78800A8B12D /* YTConstant.h */,
+				8202380E1C96B78800A8B12D /* YTConstant.m */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
 		821E6EBB1C96663E006F49D5 = {
 			isa = PBXGroup;
 			children = (
@@ -76,9 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				821E6EDE1C9667A2006F49D5 /* Classes */,
-				821E6ECD1C96663F006F49D5 /* ViewController.h */,
-				821E6ECE1C96663F006F49D5 /* ViewController.m */,
-				821E6ED01C96663F006F49D5 /* Main.storyboard */,
 				821E6ED31C96663F006F49D5 /* Assets.xcassets */,
 				821E6ED51C96663F006F49D5 /* LaunchScreen.storyboard */,
 				821E6ED81C96663F006F49D5 /* Info.plist */,
@@ -90,6 +128,10 @@
 		821E6EC71C96663E006F49D5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				82DA21B11C9BA48B00108B39 /* domeImage0.png */,
+				82DA21B21C9BA48B00108B39 /* domeImage1.jpg */,
+				82DA21B31C9BA48B00108B39 /* domeImage2.jpg */,
+				82DA21B41C9BA48B00108B39 /* domeImage3.jpg */,
 				821E6EC81C96663F006F49D5 /* main.m */,
 				821E6EE11C969D54006F49D5 /* PrefectAssistant.pch */,
 			);
@@ -99,6 +141,10 @@
 		821E6EDE1C9667A2006F49D5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8282F9BE1CA13264008DC02A /* Life */,
+				820238081C96B5B500A8B12D /* Constant */,
+				82DA21A71C9BA3CF00108B39 /* HomePage */,
+				821E6EE91C96B47A006F49D5 /* Main */,
 				821E6EE01C9667A2006F49D5 /* Others */,
 				821E6EDF1C9667A2006F49D5 /* Libs */,
 			);
@@ -108,6 +154,8 @@
 		821E6EDF1C9667A2006F49D5 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				823E85771C9F9F8B00A3BCA0 /* UIView+Extension.h */,
+				823E85781C9F9F8B00A3BCA0 /* UIView+Extension.m */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
@@ -119,6 +167,114 @@
 				821E6ECB1C96663F006F49D5 /* AppDelegate.m */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		821E6EE91C96B47A006F49D5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8282F9BA1CA12A25008DC02A /* Views */,
+				8282F9B31CA12742008DC02A /* Tools */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8282F9B31CA12742008DC02A /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				8282F9B41CA12776008DC02A /* YTHTTPTool.h */,
+				8282F9B51CA12776008DC02A /* YTHTTPTool.m */,
+				8282F9B71CA12810008DC02A /* YTHTTPFile.h */,
+				8282F9B81CA12810008DC02A /* YTHTTPFile.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		8282F9BA1CA12A25008DC02A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8282F9BB1CA12A46008DC02A /* YTAlertView.h */,
+				8282F9BC1CA12A46008DC02A /* YTAlertView.m */,
+			);
+			name = Views;
+			path = Tools/Views;
+			sourceTree = "<group>";
+		};
+		8282F9BE1CA13264008DC02A /* Life */ = {
+			isa = PBXGroup;
+			children = (
+				8282F9BF1CA13399008DC02A /* Cookbook */,
+			);
+			path = Life;
+			sourceTree = "<group>";
+		};
+		8282F9BF1CA13399008DC02A /* Cookbook */ = {
+			isa = PBXGroup;
+			children = (
+				8282F9C01CA13399008DC02A /* Controller */,
+				8282F9C11CA13399008DC02A /* Model */,
+				8282F9C21CA13399008DC02A /* View */,
+			);
+			path = Cookbook;
+			sourceTree = "<group>";
+		};
+		8282F9C01CA13399008DC02A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8282F9C31CA13557008DC02A /* YTCookBookController.h */,
+				8282F9C41CA13557008DC02A /* YTCookBookController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8282F9C11CA13399008DC02A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8282F9C21CA13399008DC02A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		82DA21A71C9BA3CF00108B39 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				82DA21A81C9BA3CF00108B39 /* Controller */,
+				82DA21AB1C9BA3CF00108B39 /* Model */,
+				82DA21AC1C9BA3CF00108B39 /* View */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		82DA21A81C9BA3CF00108B39 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				82DA21A91C9BA3CF00108B39 /* YTHomePageController.h */,
+				82DA21AA1C9BA3CF00108B39 /* YTHomePageController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		82DA21AB1C9BA3CF00108B39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		82DA21AC1C9BA3CF00108B39 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82DA21AE1C9BA3EB00108B39 /* YTRoundView.h */,
+				82DA21AF1C9BA3EB00108B39 /* YTRoundView.m */,
+				82DA21B91C9BAC8B00108B39 /* YTModuleView.h */,
+				82DA21BA1C9BAC8B00108B39 /* YTModuleView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9C380C16A70AEE477C388669 /* Frameworks */ = {
@@ -189,9 +345,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82DA21B51C9BA48B00108B39 /* domeImage0.png in Resources */,
 				821E6ED71C96663F006F49D5 /* LaunchScreen.storyboard in Resources */,
+				82DA21B81C9BA48B00108B39 /* domeImage3.jpg in Resources */,
+				82DA21B71C9BA48B00108B39 /* domeImage2.jpg in Resources */,
+				82DA21B61C9BA48B00108B39 /* domeImage1.jpg in Resources */,
 				821E6ED41C96663F006F49D5 /* Assets.xcassets in Resources */,
-				821E6ED21C96663F006F49D5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,23 +409,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				821E6ECF1C96663F006F49D5 /* ViewController.m in Sources */,
+				82DA21AD1C9BA3CF00108B39 /* YTHomePageController.m in Sources */,
+				8282F9B91CA12810008DC02A /* YTHTTPFile.m in Sources */,
+				82DA21B01C9BA3EB00108B39 /* YTRoundView.m in Sources */,
 				821E6ECC1C96663F006F49D5 /* AppDelegate.m in Sources */,
+				8282F9B61CA12776008DC02A /* YTHTTPTool.m in Sources */,
+				823E85791C9F9F8B00A3BCA0 /* UIView+Extension.m in Sources */,
+				82DA21BB1C9BAC8B00108B39 /* YTModuleView.m in Sources */,
+				8282F9BD1CA12A46008DC02A /* YTAlertView.m in Sources */,
 				821E6EC91C96663F006F49D5 /* main.m in Sources */,
+				8282F9C51CA13557008DC02A /* YTCookBookController.m in Sources */,
+				8202380F1C96B78800A8B12D /* YTConstant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		821E6ED01C96663F006F49D5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				821E6ED11C96663F006F49D5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		821E6ED51C96663F006F49D5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
