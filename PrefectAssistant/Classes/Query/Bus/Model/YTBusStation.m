@@ -24,4 +24,24 @@ const CGFloat YTBusStationHeight = 60;
     
 }
 
+- (void)setStartTime:(NSString *)startTime {
+    
+    NSMutableString *mString = [NSMutableString stringWithString:startTime];
+    [mString insertString:@":" atIndex:2];
+    _startTime = [mString copy];
+}
+
+- (void)setEndTime:(NSString *)endTime {
+    NSMutableString *mString = [NSMutableString stringWithString:endTime];
+    [mString insertString:@":" atIndex:2];
+    _endTime = [mString copy];
+}
+
+- (void)setLength:(NSString *)length {
+    
+    CGFloat fLength = length.doubleValue;
+    
+    _length = [NSString stringWithFormat:@"%0.2f公里", fLength];
+}
+
 @end

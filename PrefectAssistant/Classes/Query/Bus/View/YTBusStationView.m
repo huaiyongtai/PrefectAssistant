@@ -40,7 +40,7 @@
     UIView *containView = [[UIView alloc] init]; {
         //Vertical Horizontal
         CGFloat verticalMargin = 5; //垂直间距
-        CGFloat horizontalMargin = 5;  //水平间距
+        CGFloat horizontalMargin = 0;  //水平间距
         
         CGFloat height = (YTBusStationHeight-verticalMargin) / 3;
         CGFloat width = (YTSCREEN_W - 2*horizontalMargin) / 3;
@@ -58,7 +58,7 @@
             [fromNameLabel setFrame:CGRectMake(horizontalMargin, fromLabel.bottomY, width, height)];
             [fromNameLabel setTextAlignment:NSTextAlignmentRight];
             [fromNameLabel setTextColor:YTColorGrayText];
-            [fromNameLabel setFont:[UIFont systemFontOfSize:12]];
+            [fromNameLabel setFont:[UIFont systemFontOfSize:11]];
         }
         [containView addSubview:fromNameLabel];
         self.fromNameLabel = fromNameLabel;
@@ -109,7 +109,7 @@
             [endNameLabel setFrame:CGRectMake(endLabel.x, endLabel.bottomY, width, height)];
             [endNameLabel setTextAlignment:NSTextAlignmentLeft];
             [endNameLabel setTextColor:YTColorGrayText];
-            [endNameLabel setFont:[UIFont systemFontOfSize:12]];
+            [endNameLabel setFont:[UIFont systemFontOfSize:11]];
         }
         [containView addSubview:endNameLabel];
         self.endNameLabel = endNameLabel;

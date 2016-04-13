@@ -903,14 +903,14 @@
 		829E29331CA4053700ADFB78 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				829E293C1CA41BEE00ADFB78 /* YTTrainInfoQueryController.h */,
+				829E293D1CA41BEE00ADFB78 /* YTTrainInfoQueryController.m */,
 				82CB4CEC1CAA659900DCBBBE /* YTTrainStationController.h */,
 				82CB4CED1CAA659900DCBBBE /* YTTrainStationController.m */,
 				8281410F1CA94152002BC47C /* YTTrainNumberController.h */,
 				828141101CA94152002BC47C /* YTTrainNumberController.m */,
 				828141001CA90AC0002BC47C /* YTStationToStationController.h */,
 				828141011CA90AC0002BC47C /* YTStationToStationController.m */,
-				829E293C1CA41BEE00ADFB78 /* YTTrainInfoQueryController.h */,
-				829E293D1CA41BEE00ADFB78 /* YTTrainInfoQueryController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
