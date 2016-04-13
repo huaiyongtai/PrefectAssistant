@@ -48,6 +48,7 @@
         self.index = self.result.index;
         self.weatherData = self.result.weather_data;
         self.weather = cachedWeather;
+        [self.tableView reloadData];
     }
 }
 -(void)configureViews{
@@ -119,6 +120,9 @@
 
 // 2
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.weatherData.count==0) {
+        return 0;
+    }
     return 3;
 }
 

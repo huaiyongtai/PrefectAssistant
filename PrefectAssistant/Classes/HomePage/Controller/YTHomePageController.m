@@ -144,7 +144,7 @@
                                                                                                     animated:YES];
                                                                break;
                                                            case 3:
-                                                               [self rightNavDidClick];
+                                                               [self leftNavDidClick];
                                                                break;
                                                        }
                                                    }];

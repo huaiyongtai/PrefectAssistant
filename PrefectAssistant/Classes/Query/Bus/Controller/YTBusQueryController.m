@@ -74,6 +74,12 @@
     [self.view addSubview:queryBtn];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+    [self.addressField becomeFirstResponder];
+}
+
 - (UIButton *)setupRadioBtnWithTitle:(NSString *)title action:(SEL)action {
     
     UIButton *radioBtn = [UIButton buttonWithType:UIButtonTypeCustom]; {
@@ -91,6 +97,10 @@
 - (void)radioBtnDidClick:(UIButton *)btn {
     
     [self.view endEditing:YES];
+    
+    if (self.selectedQueryBtn != btn) {
+        self.busKeywordField.text = nil;
+    }
     
     [self.selectedQueryBtn setSelected:NO];
     [btn setSelected:YES];
@@ -115,15 +125,14 @@
     [self.view endEditing:YES];
     
     
-//    if (!(self.busKeywordField.text.length && self.addressField.text.length)) {
-//        [YTAlertView showAlertMsg:@"信息填写不完整"];
-//        return;
-//    }
+    if (!(self.busKeywordField.text.length && self.addressField.text.length)) {
+        [YTAlertView showAlertMsg:@"信息填写不完整"];
+        return;
+    }
     
     YTBusStationController *busStationVC = [[YTBusStationController alloc] init]; {
-        
-        busStationVC.busInfo = @"13";//self.busKeywordField.text;
-        busStationVC.address = @"长春";//self.addressField.text;
+        busStationVC.busInfo = self.busKeywordField.text;
+        busStationVC.address = self.addressField.text;
         if (self.selectedQueryBtn.tag == 1) {
             busStationVC.infoType = YTBusInfoTypeBusStation;
         } else {

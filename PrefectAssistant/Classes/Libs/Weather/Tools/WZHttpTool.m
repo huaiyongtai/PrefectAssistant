@@ -29,7 +29,10 @@
         NSDictionary *resp = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         WZWeather *weather = [[WZWeather alloc]initWithDictionary:resp error:nil];
         if (weather) {
-            success(weather);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                success(weather);
+            });
         }
     }];
 }
