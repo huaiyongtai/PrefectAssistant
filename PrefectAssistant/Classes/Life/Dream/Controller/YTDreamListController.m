@@ -21,22 +21,19 @@
     
     [super viewDidLoad];
     
+    self.title = self.keyWord;
     
     [self.view setBackgroundColor:YTRandomColor];
-    
-    self.title = self.keyWord;
     
     [self.tableView setTableFooterView:[[UIView alloc] init]];
     
     [self loadDreamDataFromNetwork];
-
-    
 }
 
 - (void)loadDreamDataFromNetwork {
     
     NSDictionary *parameters = @{@"key" : @"50d88e8ad11b50b0ab49d119b61e13b0",
-                                 @"q"   : @"黄瓜",
+                                 @"q"   : self.keyWord,
                                  @"full": @"1"};
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     [mgr GET:@"http://v.juhe.cn/dream/query" parameters:parameters  progress:nil
@@ -48,7 +45,6 @@
 
          NSLog(@"error:%@", error);
      }];
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -69,6 +65,5 @@
     YTDream *dream = self.dreamRuslts[indexPath.row];
     return dream.totalHeight;
 }
-
 
 @end

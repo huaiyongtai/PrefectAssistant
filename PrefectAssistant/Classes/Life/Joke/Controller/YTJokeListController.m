@@ -36,18 +36,20 @@ typedef NS_ENUM(NSUInteger, YTJokeTypes) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-    [self.view setBackgroundColor:YTRandomColor];
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    
-    self.jokes = [NSMutableArray array];
-    self.tempJokes = [NSMutableArray array];
+
+    [self setTitle:@"搞笑生活"];
+    _jokes = [NSMutableArray array];
+    _tempJokes = [NSMutableArray array];
    
     [self setupUIConfig];
 }
 
 - (void)setupUIConfig {
-   
+  
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    
+    [self.view setBackgroundColor:YTColorBackground];
+    
     CGFloat margin = 10;
     HMSegmentedControl *segementControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"文字模式", @"图片模式"]]; {
         [segementControl setFrame:CGRectMake(-1, 64+margin, YTSCREEN_W+2, 40)];
@@ -69,9 +71,10 @@ typedef NS_ENUM(NSUInteger, YTJokeTypes) {
     }
     [self.view addSubview:segementControl];
     
-    CGFloat tableViewH = YTSCREEN_H - segementControl.bottomY + margin;
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, segementControl.bottomY + margin, YTSCREEN_W, tableViewH) style:UITableViewStylePlain]; {
-        [tableView setBackgroundColor:YTRandomColor];
+    CGFloat tableViewH = YTSCREEN_H - segementControl.bottomY;
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, segementControl.bottomY, YTSCREEN_W, tableViewH)
+                                                          style:UITableViewStylePlain]; {
+        [tableView setBackgroundColor:YTColorBackground];
         [tableView setDelegate:self];
         [tableView setDataSource:self];
         [tableView setTableFooterView:[[UIView alloc] init]];

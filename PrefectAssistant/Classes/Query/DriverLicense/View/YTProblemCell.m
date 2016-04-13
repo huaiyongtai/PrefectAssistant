@@ -41,13 +41,13 @@
 
     UIScrollView *containView = [[UIScrollView alloc] init]; {
     
-        [containView setBackgroundColor:YTRandomColor];
+        [containView setBackgroundColor:YTColorBackground];
         [containView setFrame:self.bounds];
         [containView setShowsVerticalScrollIndicator:NO];
         [containView setShowsHorizontalScrollIndicator:NO];
         
         UILabel *questionLabel = [[UILabel alloc] init]; {
-            [questionLabel setBackgroundColor:YTRandomColor];
+            [questionLabel setTextColor:YTColorGrayText];
             [questionLabel setNumberOfLines:0];
         }
         [containView addSubview:questionLabel];
@@ -55,33 +55,35 @@
         
         UIImageView *urlImageView = [[UIImageView alloc] init]; {
             [urlImageView setContentMode:UIViewContentModeScaleAspectFit];
-            [urlImageView setBackgroundColor:YTRandomColor];
         }
         [containView addSubview:urlImageView];
         self.urlImageView = urlImageView;
         
         UIButton *item1Btn = [[UIButton alloc] init]; {
-            [item1Btn setBackgroundColor:YTRandomColor];
             [item1Btn.titleLabel setNumberOfLines:0];
             [item1Btn setTag:1];
+            [item1Btn setBackgroundColor:[UIColor whiteColor]];
+            [item1Btn setTitleColor:YTColorTintText forState:UIControlStateNormal];
             [item1Btn addTarget:self action:@selector(itemBtnDidClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         [containView addSubview:item1Btn];
         self.item1Btn = item1Btn;
         
         UIButton *item2Btn = [[UIButton alloc] init]; {
-            [item2Btn setBackgroundColor:YTRandomColor];
             [item2Btn.titleLabel setNumberOfLines:0];
             [item2Btn setTag:2];
+            [item2Btn setBackgroundColor:[UIColor whiteColor]];
+            [item2Btn setTitleColor:YTColorTintText forState:UIControlStateNormal];
             [item2Btn addTarget:self action:@selector(itemBtnDidClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         [containView addSubview:item2Btn];
         self.item2Btn = item2Btn;
         
         UIButton *item3Btn = [[UIButton alloc] init]; {
-            [item3Btn setBackgroundColor:YTRandomColor];
             [item3Btn.titleLabel setNumberOfLines:0];
             [item3Btn setTag:3];
+            [item3Btn setBackgroundColor:[UIColor whiteColor]];
+            [item3Btn setTitleColor:YTColorTintText forState:UIControlStateNormal];
             [item3Btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
             [item3Btn addTarget:self action:@selector(itemBtnDidClick:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -89,9 +91,10 @@
         self.item3Btn = item3Btn;
         
         UIButton *item4Btn = [[UIButton alloc] init]; {
-            [item4Btn setBackgroundColor:YTRandomColor];
             [item4Btn.titleLabel setNumberOfLines:0];
             [item4Btn setTag:4];
+            [item4Btn setBackgroundColor:[UIColor whiteColor]];
+            [item4Btn setTitleColor:YTColorTintText forState:UIControlStateNormal];
             [item4Btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
             [item4Btn addTarget:self action:@selector(itemBtnDidClick:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -99,8 +102,9 @@
         self.item4Btn = item4Btn;
         
         UILabel *explainsLabel = [[UILabel alloc] init]; {
-            [explainsLabel setBackgroundColor:YTRandomColor];
             [explainsLabel setNumberOfLines:0];
+            [explainsLabel.layer setBorderWidth:HLineSeparate];
+            [explainsLabel.layer setBorderColor:YTColorLineSeparate];
         }
         [containView addSubview:explainsLabel];
         self.explainsLabel = explainsLabel;

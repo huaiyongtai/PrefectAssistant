@@ -82,7 +82,7 @@
     [super layoutSubviews];
     
     CGFloat margin = 8;    //外边距
-    CGFloat padding = margin;   //元素之间的边距
+    CGFloat padding = 5;   //元素之间的边距
     
     NSInteger totalItems = self.kindItems.count;
     

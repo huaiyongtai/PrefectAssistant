@@ -27,10 +27,6 @@
     } else {
         self.totalHeight = CGRectGetMaxY(self.contentF) + margin;
     }
-    
-    
-    
-    
 }
 
 @end

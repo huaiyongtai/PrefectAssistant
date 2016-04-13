@@ -38,7 +38,6 @@ static const CGFloat YTTextViewMinH = 70;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:YTRandomColor];
     
     self.title = @"翻译";
     
@@ -46,8 +45,9 @@ static const CGFloat YTTextViewMinH = 70;
 }
 - (void)setupUIConfig {
     
+    [self.view setBackgroundColor:YTColorBackground]
+    ;
     UIScrollView *containView = [[UIScrollView alloc] init]; {
-        
         [containView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
         [containView setFrame:CGRectMake(0, 0, YTSCREEN_W, YTSCREEN_H)];
         
@@ -55,9 +55,8 @@ static const CGFloat YTTextViewMinH = 70;
         CGFloat margin = 15;
         
         CGFloat choiceLanguageW = (containView.width-2*margin) / 3;
-        CGFloat choiceLanguageH = 30;
+        CGFloat choiceLanguageH = 35;
         YTChoiceLanguageBtn *originBtn = [[YTChoiceLanguageBtn alloc] init]; {
-            [originBtn setBackgroundColor:YTRandomColor];
             [originBtn setLanguage:[YTLanguageCode languageCodeWithName:@"英语" code:@"en"]];
             [originBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
             [originBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_up"] forState:UIControlStateSelected];
@@ -68,8 +67,8 @@ static const CGFloat YTTextViewMinH = 70;
         self.originBtn = originBtn;
         
         UIButton *exchengeBtn = [[UIButton alloc] init]; {
-            [exchengeBtn setBackgroundColor:YTRandomColor];
             [exchengeBtn setTitle:@"交换" forState:UIControlStateNormal];
+            [exchengeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [exchengeBtn setFrame:CGRectMake(originBtn.rightX, originBtn.y, choiceLanguageW, choiceLanguageH)];
             [exchengeBtn addTarget:self action:@selector(exchangeChoiceConetent) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -77,7 +76,6 @@ static const CGFloat YTTextViewMinH = 70;
         
         YTChoiceLanguageBtn *destinationBtn = [[YTChoiceLanguageBtn alloc] init]; {
             [destinationBtn setLanguage:[YTLanguageCode languageCodeWithName:@"中文" code:@"zh"]];
-            [destinationBtn setBackgroundColor:YTRandomColor];
             [destinationBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
             [destinationBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_up"] forState:UIControlStateSelected];
             [destinationBtn setFrame:CGRectMake(exchengeBtn.rightX, exchengeBtn.y, choiceLanguageW, choiceLanguageH)];
@@ -88,7 +86,7 @@ static const CGFloat YTTextViewMinH = 70;
         self.destinationBtn =  destinationBtn;
         
         //原始内容
-        CGFloat textViewOptionW = 30;
+        CGFloat textViewOptionW = 40;
         CGFloat textViewOptionH = 20;
         UITextView *originTextView = [[UITextView alloc] init]; {
             [originTextView setFrame:CGRectMake(-1, destinationBtn.bottomY + topMargin, YTSCREEN_W+2, YTTextViewMinH)];
@@ -99,7 +97,7 @@ static const CGFloat YTTextViewMinH = 70;
             [originTextView setReturnKeyType:UIReturnKeyDone];
             [originTextView setDelegate:self];
             [originTextView.layer setBorderWidth:0.5];
-            [originTextView.layer setBackgroundColor:YTRandomColor.CGColor];
+            [originTextView.layer setBorderColor:YTColorLineSeparate];
         }
         [containView addSubview:originTextView];
         self.originTextView = originTextView;
@@ -107,13 +105,15 @@ static const CGFloat YTTextViewMinH = 70;
         UIButton *clearBtn = [[UIButton alloc] init]; {
             [clearBtn setBackgroundColor:YTRandomColor];
             [clearBtn setTitle:@"清除" forState:UIControlStateNormal];
+            [clearBtn.titleLabel setFont:[UIFont systemFontOfSize:13]];
             [clearBtn setFrame:CGRectMake(originTextView.width-textViewOptionW, originTextView.y+10, textViewOptionW, textViewOptionH)];
             [clearBtn addTarget:self action:@selector(clearOriginText) forControlEvents:UIControlEventTouchUpInside];
         }
         [containView addSubview:clearBtn];
         UIButton *convertBtn = [[UIButton alloc] init]; {
-            [convertBtn setBackgroundColor:YTRandomColor];
+            [convertBtn setBackgroundColor:YTColorQueryButton];
             [convertBtn setTitle:@"翻译" forState:UIControlStateNormal];
+            [convertBtn.titleLabel setFont:[UIFont systemFontOfSize:13]];
             [convertBtn setFrame:CGRectMake(clearBtn.x, originTextView.bottomY-textViewOptionH-topMargin, textViewOptionW, textViewOptionH)];
             [convertBtn addTarget:self action:@selector(convertOriginTextToResultText) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -122,11 +122,11 @@ static const CGFloat YTTextViewMinH = 70;
         
         //翻译结果
         UILabel *resultLabel = [[UILabel alloc] init]; {
-            [resultLabel setBackgroundColor:YTRandomColor];
             [resultLabel setNumberOfLines:0];
             [resultLabel setOrigin:CGPointMake(-1, originTextView.bottomY + topMargin)];
-            [resultLabel.layer setBorderWidth:0.5];
-            [resultLabel.layer setBackgroundColor:YTRandomColor.CGColor];
+            [resultLabel setBackgroundColor:[UIColor whiteColor]];
+            [resultLabel.layer setBorderWidth:HLineSeparate];
+            [resultLabel.layer setBorderColor:YTColorLineSeparate];
         }
         [containView addSubview:resultLabel];
         self.resultLabel = resultLabel;
@@ -225,6 +225,7 @@ static const CGFloat YTTextViewMinH = 70;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
         [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
+        [cell setBackgroundColor:[UIColor clearColor]];
     }
     [cell.textLabel setText:language.name];
     
@@ -257,9 +258,12 @@ static const CGFloat YTTextViewMinH = 70;
         YTDropDownMenu *languageMenu = [YTDropDownMenu menu]; {
             [languageMenu setDelegate:self];
             [languageMenu setContentView:({
-                UITableView *contentView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 100, YTSCREEN_H*0.5)];
-                contentView.delegate = self;
-                contentView.dataSource = self;
+                UITableView *contentView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 100, YTSCREEN_H*0.5)]; {
+                    contentView.delegate = self;
+                    contentView.dataSource = self;
+                    contentView.showsVerticalScrollIndicator = NO;
+                    contentView.backgroundColor = YTColor(76, 76, 76);
+                }
                 contentView;
             })];
         }
@@ -269,6 +273,7 @@ static const CGFloat YTTextViewMinH = 70;
 }
 
 - (void)clearOriginText {
+    
     self.originTextView.text = @"";
     [self.resultLabel setSize:CGSizeZero];
     [self.originTextView setHeight:YTTextViewMinH];

@@ -24,36 +24,35 @@
    
     self.title = @"驾考测试";
     
-    [self.view setBackgroundColor:YTRandomColor];
+    [self.view setBackgroundColor:YTColorBackground];
     
-    CGFloat topMargin = 10;
+    CGFloat topMargin = HMargin;
     
     UIView *subjectView = [self setupRadioViewWithRadioNames:@[@"科目1", @"科目4"]
                                                       action:@selector(subjectBtnDidClick:)]; {
-        [subjectView setBackgroundColor:YTRandomColor];
-        [subjectView setOrigin:CGPointMake(-1, 64 + topMargin)];
+        [subjectView setOrigin:CGPointMake(-1, HNav + topMargin)];
     }
     [self.view addSubview:subjectView];
     
     UIView *modelTypeView = [self setupRadioViewWithRadioNames:@[@"C1", @"C2", @"B1", @"B2", @"A1", @"A2"]
                                                         action:@selector(modelTypeBtnDidClick:)]; {
-        [modelTypeView setBackgroundColor:YTRandomColor];
         [modelTypeView setOrigin:CGPointMake(-1, subjectView.bottomY + topMargin)];
     }
     [self.view addSubview:modelTypeView];
     
     UIView *examTypeView = [self setupRadioViewWithRadioNames:@[@"测试模式", @"训练模式"]
                                                        action:@selector(examTypeBtnDidClick:)]; {
-        [examTypeView setBackgroundColor:YTRandomColor];
         [examTypeView setOrigin:CGPointMake(-1, modelTypeView.bottomY + topMargin)];
     }
     [self.view addSubview:examTypeView];
     
     UIButton *startExamBtn = [UIButton buttonWithType:UIButtonTypeCustom]; {
         CGFloat margin = 20;
-        [startExamBtn setBackgroundColor:YTRandomColor];
-        [startExamBtn setFrame:CGRectMake(20, examTypeView.bottomY + 3*topMargin, (YTSCREEN_W-2*margin), 40)];
+        [startExamBtn setBackgroundColor:YTColorQueryButton];
+        [startExamBtn setFrame:CGRectMake(20, examTypeView.bottomY + HMargin, (YTSCREEN_W-2*margin), 40)];
         [startExamBtn setTitle:@"开始测试" forState:UIControlStateNormal];
+        [startExamBtn.layer setMasksToBounds:YES];
+        [startExamBtn.layer setCornerRadius:5];
         [startExamBtn addTarget:self action:@selector(startExamDidClick) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view addSubview:startExamBtn];
@@ -61,12 +60,12 @@
 }
 - (UIView *)setupRadioViewWithRadioNames:(NSArray *)radioNames action:(SEL)action {
     
-    UIView *radioView = [[UIView alloc] initWithFrame:CGRectMake(-1, 0, YTSCREEN_W+2, 0)]; {
+    UIView *radioView = [[UIView alloc] init]; {
         CGFloat margin = 34;
         CGFloat padding = 9;
         NSInteger colCount = 2;
         CGFloat height = 40;
-        CGFloat width = (radioView.width - 2*margin) * 0.5;
+        CGFloat width = (YTSCREEN_W - 2*margin) * 0.5;
         for (NSUInteger index = 0; index<radioNames.count; index++) {
             UIButton *radioBtn = [UIButton buttonWithType:UIButtonTypeCustom]; {
                 [radioBtn setTag:index];
@@ -87,9 +86,10 @@
         }
         NSInteger rowCount = radioNames.count/colCount + radioNames.count%colCount;
         CGFloat radioViewHeight = rowCount * height;
-        [radioView setFrame:CGRectMake(0, 0, radioView.width, radioViewHeight)];
-        [radioView.layer setBorderColor:YTRandomColor.CGColor];
-        [radioView.layer setBorderWidth:0.5];
+        [radioView setBackgroundColor:[UIColor whiteColor]];
+        [radioView setFrame:CGRectMake(0, 0, YTSCREEN_W+2, radioViewHeight)];
+        [radioView.layer setBorderColor:YTColorLineSeparate];
+        [radioView.layer setBorderWidth:HLineSeparate];
     }
     
     return radioView;

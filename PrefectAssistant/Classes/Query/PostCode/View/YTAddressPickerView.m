@@ -8,12 +8,6 @@
 
 #import "YTAddressPickerView.h"
 
-@interface YTAddressPickerView ()
-
-@property (nonatomic, weak) UIPickerView *pickerView;
-
-@end
-
 @implementation YTAddressPickerView
 
 - (void)showPikerView {
@@ -29,18 +23,18 @@
         [confirmBtn setFrame:CGRectMake(0, self.height-btnH, self.width, btnH)];
         [confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
         [confirmBtn addTarget:self action:@selector(confirmBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
-        [confirmBtn setBackgroundColor:YTRandomColor];
+        [confirmBtn setBackgroundColor:YTColorQueryButton];
     }
     [self addSubview:confirmBtn];
     
-    UIPickerView *pickerView = [[UIPickerView alloc] init]; {
+    UIPickerView *picker = [[UIPickerView alloc] init]; {
         CGFloat height = totalHeight*0.8;
-        [pickerView setFrame:CGRectMake(0, confirmBtn.y-height, self.width, totalHeight*0.8)];
-        [pickerView setBackgroundColor:YTRandomColor];
-        [pickerView setDelegate:self.delegate];
+        [picker setFrame:CGRectMake(0, confirmBtn.y-height, self.width, totalHeight*0.8)];
+        [picker setBackgroundColor:[UIColor whiteColor]];
+        [picker setDelegate:self.delegate];
     }
-    [self addSubview:pickerView];
-    self.pickerView = pickerView;
+    [self addSubview:picker];
+    _picker = picker;
     
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -52,8 +46,8 @@
     
     _delegate = delegate;
     
-    self.pickerView.delegate = delegate;
-    self.pickerView.dataSource = delegate;
+    self.picker.delegate = delegate;
+    self.picker.dataSource = delegate;
 }
 
 - (void)confirmBtnDidClick {
@@ -62,12 +56,19 @@
         [self.delegate addressPickerDidSelectedQueryAddress:self];
     }
     
+    [self dismissView];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self dismissView];
+}
+
+- (void)dismissView {
     [UIView animateWithDuration:0.3 animations:^{
         self.y += 200;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
-    
 }
 
 

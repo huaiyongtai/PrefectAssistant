@@ -13,6 +13,16 @@ static CGFloat const kTitleAndImagePadding = 10;
 
 @implementation YTChoiceLanguageBtn
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    
+    self = [super initWithFrame:frame];
+    if (self == nil) return nil;
+    
+    [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    return self;
+}
+
 - (CGRect)imageRectForContentRect:(CGRect)contentRect {
     
     [super imageRectForContentRect:contentRect];

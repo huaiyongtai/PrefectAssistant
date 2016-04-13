@@ -39,7 +39,7 @@
     
     UILabel *contentLabel = [[UILabel alloc] init]; {
         [contentLabel setFont:YTJokeContentFont];
-        [contentLabel setBackgroundColor:YTRandomColor];
+        [contentLabel setBackgroundColor:[UIColor whiteColor]];
         [contentLabel setNumberOfLines:0];
     }
     [self.contentView addSubview:contentLabel];
@@ -47,8 +47,8 @@
     
     UIImageView *urlImgView = [[UIImageView alloc] init]; {
         [urlImgView setContentMode:UIViewContentModeScaleAspectFit];
-        [urlImgView setBackgroundColor:YTRandomColor];
         [urlImgView setUserInteractionEnabled:YES];
+        [urlImgView setBackgroundColor:YTColorBackground];
         [urlImgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(previewJokeImg:)]];
     }
     [self.contentView addSubview:urlImgView];

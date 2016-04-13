@@ -37,14 +37,14 @@
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     UILabel *titleLabel = [[UILabel alloc] init]; {
-        [titleLabel setBackgroundColor:YTRandomColor];
+        [titleLabel setTextColor:YTColorGrayText];
         [titleLabel setNumberOfLines:0];
     }
     [self.contentView addSubview:titleLabel];
     self.titleLabel = titleLabel;
     
     UILabel *desLabel = [[UILabel alloc] init]; {
-        [desLabel setBackgroundColor:YTRandomColor];
+        [desLabel setTextColor:YTColorTintText];
         [desLabel setNumberOfLines:0];
         [desLabel setFont:YTDreamDesFont];
     }

@@ -17,7 +17,6 @@
 
 @property (nonatomic, strong) YTEventDetail *eventDetail;
 
-
 @end
 
 @implementation YTHistoryEventDetailController
@@ -26,11 +25,9 @@
     
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:YTRandomColor];
-    
+    [self.view setBackgroundColor:YTColorBackground];
     
     [self.navigationItem setTitleView:({
-    
         UILabel *titlelabel = [[UILabel alloc] init]; {
             [titlelabel setText:self.historyEvent.title];
             [titlelabel setFont:[UIFont systemFontOfSize:14]];
@@ -58,8 +55,8 @@
     
     _eventDetail = eventDetail;
     UIScrollView *containView = [[UIScrollView alloc] init]; {
-        [containView setFrame:CGRectMake(0, 64, YTSCREEN_W, YTSCREEN_H-64)];
-        [containView setBackgroundColor:YTRandomColor];
+        [containView setFrame:CGRectMake(0, HNav, YTSCREEN_W, YTSCREEN_H-64)];
+        [containView setBackgroundColor:YTColorBackground];
         [containView setShowsVerticalScrollIndicator:NO];
     }
     [self.view addSubview:containView];
@@ -78,8 +75,8 @@
     UILabel *contentView = [[UILabel alloc] init]; {
         [contentView setNumberOfLines:0];
         [contentView setFont:[UIFont systemFontOfSize:16]];
+        [contentView setTextColor:YTColorGrayText];
         [contentView setText:eventDetail.content];
-        [contentView setBackgroundColor:YTRandomColor];
         [contentView setFrame:({
             CGFloat horMargin = 6;
             CGFloat contentW = YTSCREEN_W - 2*horMargin;
@@ -90,6 +87,5 @@
     [containView addSubview:contentView];
     [containView setContentSize:CGSizeMake(0, contentView.bottomY)];
 }
-
 
 @end

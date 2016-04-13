@@ -64,7 +64,7 @@
     CGFloat pickerViewH = 180;
     UIPickerView *pickerView = [[UIPickerView alloc] init]; {
         [pickerView setFrame:CGRectMake(0, self.height-btnH-pickerViewH, self.width, pickerViewH)];
-        [pickerView setBackgroundColor:YTRandomColor];
+        [pickerView setBackgroundColor:[UIColor whiteColor]];
         [pickerView setDelegate:self];
         [pickerView setDataSource:self];
     }
@@ -74,7 +74,7 @@
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom]; {
         [cancelBtn setFrame:CGRectMake(0, pickerView.bottomY, self.width*0.5, btnH)];
         [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
-        [cancelBtn setBackgroundColor:YTRandomColor];
+        [cancelBtn setBackgroundColor:YTColor(222, 0, 167)];
         [cancelBtn addTarget:self action:@selector(pickerDidSelectedFinish:) forControlEvents:UIControlEventTouchUpInside];
     }
     [self addSubview:cancelBtn];
@@ -83,7 +83,7 @@
     UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom]; {
         [confirmBtn setFrame:CGRectMake(cancelBtn.rightX, cancelBtn.y, cancelBtn.width, btnH)];
         [confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
-        [confirmBtn setBackgroundColor:YTRandomColor];
+        [confirmBtn setBackgroundColor:YTColorQueryButton];
         [confirmBtn addTarget:self action:@selector(pickerDidSelectedFinish:) forControlEvents:UIControlEventTouchUpInside];
     }
     [self addSubview:confirmBtn];

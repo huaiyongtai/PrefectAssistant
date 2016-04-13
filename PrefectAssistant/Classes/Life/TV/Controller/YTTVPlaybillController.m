@@ -24,7 +24,7 @@
     
     self.title = self.tvShow.channelName;
 
-    [self.tableView setBackgroundColor:YTRandomColor];
+    [self.tableView setBackgroundColor:YTColorBackground];
     [self.tableView setTableFooterView:[[UIView alloc] init]];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadTVPlaybillFromNetwork];
@@ -79,14 +79,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseId];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell.detailTextLabel setFont:[UIFont systemFontOfSize:14]];
     }
-    
-    cell.textLabel.text = tvPlaybill.pName;
-    cell.detailTextLabel.text = tvPlaybill.time;
+    cell.textLabel.text = tvPlaybill.time;
+    cell.detailTextLabel.text = tvPlaybill.pName;
     
     return cell;
 }
+
 
 
 

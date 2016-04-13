@@ -40,17 +40,17 @@
     
     [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
-    UILabel *dishInfoLabel = [[UILabel alloc] init];
-    {
+    UILabel *dishInfoLabel = [[UILabel alloc] init]; {
         [dishInfoLabel setNumberOfLines:0];
     }
     [self.contentView addSubview:dishInfoLabel];
     self.dishInfoLabel = dishInfoLabel;
     
-    UIImageView *imgView = [[UIImageView alloc] init];
-    {
+    UIImageView *imgView = [[UIImageView alloc] init]; {
         [imgView setContentMode:UIViewContentModeScaleAspectFill];
         [imgView setClipsToBounds:YES];
+        [imgView.layer setMasksToBounds:YES];
+        [imgView.layer setCornerRadius:5];
     }
     [self.contentView addSubview:imgView];
     self.imgView = imgView;
@@ -69,8 +69,11 @@
     [self.dishInfoLabel setAttributedText:({
         NSString *dishInfoStr = [NSString stringWithFormat:@"%@\n%@", dish.name, dish.keywords];
         NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:dishInfoStr];
-        [attString setAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} range:NSMakeRange(0, dish.name.length)];
-        [attString setAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} range:NSMakeRange(dish.name.length, dish.keywords.length)];
+        [attString setAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]}
+                           range:NSMakeRange(0, dish.name.length)];
+        [attString setAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                   NSForegroundColorAttributeName : YTColor(83, 83, 83)}
+                           range:NSMakeRange(dish.name.length, dish.keywords.length)];
         attString;
     })];}
 

@@ -20,34 +20,43 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setTitle:@"电视分类"];
+  
+    [self setupUIConfig];
+}
+
+#pragma mark -
+- (void)setupUIConfig {
     
-    [self.view setBackgroundColor:YTRandomColor];
+    [self.view setBackgroundColor:YTColorBackground];
     
-    CGFloat margin = 10;
     UIView *tvCategoryView = [self setupRadioViewWithRadioNames:@[@"央视", @"卫视", @"数字", @"城市", @"CETV", @"原创"]
-                                                        action:@selector(tvTypeBtnDidClick:)]; {
-        [tvCategoryView setBackgroundColor:YTRandomColor];
-        [tvCategoryView setOrigin:CGPointMake(-1, 64 + margin)];
+                                                         action:@selector(tvTypeBtnDidClick:)]; {
+        [tvCategoryView setBackgroundColor:[UIColor whiteColor]];
+        [tvCategoryView setOrigin:CGPointMake(-1, HNav + HMargin)];
+        [tvCategoryView.layer setBorderWidth:HLineSeparate];
+        [tvCategoryView.layer setBorderColor:YTColorLineSeparate];
     }
     [self.view addSubview:tvCategoryView];
     
     UIButton *queryBtn = [UIButton buttonWithType:UIButtonTypeCustom]; {
-        [queryBtn setBackgroundColor:YTRandomColor];
-        [queryBtn setFrame:CGRectMake(20, tvCategoryView.bottomY + margin, YTSCREEN_W-2*20, 40)];
+        [queryBtn setFrame:CGRectMake(20, tvCategoryView.bottomY + HMargin, YTSCREEN_W-2*20, 40)];
         [queryBtn addTarget:self action:@selector(tvPlaybillQuery) forControlEvents:UIControlEventTouchUpInside];
+        [queryBtn setBackgroundColor:YTColorQueryButton];
         [queryBtn setTitle:@"查询" forState:UIControlStateNormal];
+        [queryBtn.layer setMasksToBounds:YES];
+        [queryBtn.layer setCornerRadius:5];
     }
     [self.view addSubview:queryBtn];
 }
-
 - (UIView *)setupRadioViewWithRadioNames:(NSArray *)radioNames action:(SEL)action {
     
-    UIView *radioView = [[UIView alloc] initWithFrame:CGRectMake(-1, 0, YTSCREEN_W+2, 0)]; {
+    UIView *radioView = [[UIView alloc] init]; {
         CGFloat margin = 40;
         CGFloat padding = 9;
         NSInteger colCount = 2;
         CGFloat height = 40;
-        CGFloat width = (radioView.width - 2*margin) * 0.5;
+        CGFloat width = (YTSCREEN_W - 2*margin) * 0.5;
         for (NSUInteger index = 0; index<radioNames.count; index++) {
             UIButton *radioBtn = [UIButton buttonWithType:UIButtonTypeCustom]; {
                 [radioBtn setTag:index+1];
@@ -68,21 +77,18 @@
         }
         NSInteger rowCount = radioNames.count/colCount + radioNames.count%colCount;
         CGFloat radioViewHeight = rowCount * height;
-        [radioView setFrame:CGRectMake(0, 0, radioView.width, radioViewHeight)];
-        [radioView.layer setBorderColor:YTRandomColor.CGColor];
-        [radioView.layer setBorderWidth:0.5];
+        [radioView setFrame:CGRectMake(0, 0, YTSCREEN_W+2, radioViewHeight)];
     }
     return radioView;
 }
 
+#pragma mark -
 - (void)tvTypeBtnDidClick:(UIButton *)typeBtn {
     
     [self.lastTVTypeBtn setSelected:NO];
     [typeBtn setSelected:YES];
     self.lastTVTypeBtn = typeBtn;
-    
 }
-
 - (void)tvPlaybillQuery {
     
     YTChannelListController *playbillVC = [[YTChannelListController alloc] init];

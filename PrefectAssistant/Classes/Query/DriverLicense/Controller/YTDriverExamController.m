@@ -23,15 +23,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.view setBackgroundColor:YTRandomColor];
+    
+    [self.navigationItem setTitleView:({
+        UILabel *titleView = [[UILabel alloc] init]; {
+            [titleView setText:@"正在测试"];
+            titleView.height = 44;
+        }
+        self.scoreView = titleView;
+        titleView;
+    })];
     
     [self setupUIConfig];
+    
     [self driverQuestionFromNetwork];
-
 }
 
 - (void)setupUIConfig {
 
+    [self.view setBackgroundColor:YTColorBackground];
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds
                                                           collectionViewLayout:({
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -41,24 +50,13 @@
         flowLayout;})]; {
         
         [collectionView registerClass:[YTProblemCell class] forCellWithReuseIdentifier:@"YTProblemCell"];
-        [collectionView setBackgroundColor:[UIColor redColor]];
+        [collectionView setBackgroundColor:YTColorBackground];
         [collectionView setPagingEnabled:YES];
         [collectionView setDelegate:self];
         [collectionView setDataSource:self];
     }
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
-    
-    [self.navigationItem setTitleView:({
-        UILabel *titleView = [[UILabel alloc] init]; {
-            [titleView setBackgroundColor:YTRandomColor];
-            [titleView setText:@"adfasdfa"];
-            titleView.height = 44;
-        }
-        self.scoreView = titleView;
-        titleView;
-    })];
-    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -66,14 +64,12 @@
     return self.problems.count;
 }
 
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     YTProblem *problem = self.problems[indexPath.item];
     
     YTProblemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"YTProblemCell" forIndexPath:indexPath];
     [cell setDelegate:self];
-    [cell setBackgroundColor:YTRandomColor];
     [cell setProblem:problem];
     return cell;
 }

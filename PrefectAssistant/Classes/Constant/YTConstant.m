@@ -8,6 +8,11 @@
 
 #import "YTConstant.h"
 
+#pragma mark - 常量
+const float HLineSeparate = 0.5f;
+const float HNav = 64.0f;
+const float HMargin = 36.0f;
+
 #pragma mark - 百度
 //http://apistore.baidu.com/astore/classificationservicelist.html
 

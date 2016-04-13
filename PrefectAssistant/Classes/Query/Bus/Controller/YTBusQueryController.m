@@ -26,15 +26,17 @@
     [super viewDidLoad];
     
     self.title = @"公交信息查询";
-    [self.view setBackgroundColor:YTRandomColor];
+    [self.view setBackgroundColor:YTColorBackground];
    
     CGFloat margin = 20;
     UITextField *addressField = [[UITextField alloc] init]; {
-        [addressField setFrame:CGRectMake(-1, 64+margin, YTSCREEN_W+2, 40)];
+        [addressField setFrame:CGRectMake(-1, HNav+HMargin, YTSCREEN_W+2, 40)];
         [addressField setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 0)]];
         [addressField setLeftViewMode:UITextFieldViewModeAlways];
+        [addressField setBackgroundColor:[UIColor whiteColor]];
         [addressField setPlaceholder:@"城市名称 如：长春"];
-        [addressField setBackgroundColor:YTRandomColor];
+        [addressField.layer setBorderWidth:HLineSeparate];
+        [addressField.layer setBorderColor:YTColorLineSeparate];
     }
     [self.view addSubview:addressField];
     self.addressField = addressField;
@@ -43,7 +45,9 @@
         [busKeywordField setFrame:CGRectMake(-1, addressField.bottomY+margin, YTSCREEN_W+2, 40)];
         [busKeywordField setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 0)]];
         [busKeywordField setLeftViewMode:UITextFieldViewModeAlways];
-        [busKeywordField setBackgroundColor:YTRandomColor];
+        [busKeywordField setBackgroundColor:[UIColor whiteColor]];
+        [busKeywordField.layer setBorderWidth:HLineSeparate];
+        [busKeywordField.layer setBorderColor:YTColorLineSeparate];
     }
     [self.view addSubview:busKeywordField];
     self.busKeywordField = busKeywordField;
@@ -68,8 +72,10 @@
         
         [queryBtn setTitle:@"查询" forState:UIControlStateNormal];
         [queryBtn addTarget:self action:@selector(queryDidClick) forControlEvents:UIControlEventTouchUpInside];
-        [queryBtn setFrame:CGRectMake(margin, busLineBtn.bottomY+margin, YTSCREEN_W-2*margin, 40)];
-        [queryBtn setBackgroundColor:YTRandomColor];
+        [queryBtn setFrame:CGRectMake(margin, busLineBtn.bottomY+HMargin, YTSCREEN_W-2*margin, 40)];
+        [queryBtn setBackgroundColor:YTColorQueryButton];
+        [queryBtn.layer setMasksToBounds:YES];
+        [queryBtn.layer setCornerRadius:5];
     }
     [self.view addSubview:queryBtn];
 }
@@ -90,7 +96,6 @@
         [radioBtn setImage:[UIImage imageNamed:@"btn_more_choice_pre"] forState:UIControlStateSelected];
         [radioBtn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         [radioBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [radioBtn setBackgroundColor:YTRandomColor];
     }
     return radioBtn;
 }

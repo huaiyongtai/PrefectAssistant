@@ -28,6 +28,8 @@
     
     [super viewDidLoad];
     
+    [self setTitle:@"菜谱"];
+    
     [self setupUIConfig];
     
     [self loadCookSortInfoFromNetwork];
@@ -40,7 +42,7 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, YTSCREEN_W, 200)]; {
         
         YTSearchBar*searchBar = [YTSearchBar searchBar]; {
-            [searchBar setPlaceholder:@"菜品名称"];
+            [searchBar setPlaceholder:@"快速搜索"];
             [searchBar setFrame:CGRectMake(0, 0, YTSCREEN_W, 35)];
             [searchBar setDelegate:self];
             [searchBar setReturnKeyType:UIReturnKeySearch];

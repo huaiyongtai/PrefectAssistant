@@ -10,6 +10,7 @@
 #import "YTAddressPickerView.h"
 #import "YTProvince.h"
 #import "YTPostCode.h"
+#import <MJRefresh.h>
 
 @interface YTPostCodeQueryController () <UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDataSource, UITableViewDelegate, YTAddressPickerViewDelegate>
 
@@ -37,7 +38,6 @@
     [super viewDidLoad];
     
     self.title = @"邮编查询";
-    [self.view setBackgroundColor:YTRandomColor];
     
     [self setupUIConfig];
 }
@@ -54,45 +54,55 @@
 
 - (void)setupUIConfig {
     
+    [self.view setBackgroundColor:YTColorBackground];
+    
     UIButton *addressView = [UIButton buttonWithType:UIButtonTypeCustom]; {
         
-        [addressView setFrame:CGRectMake(0, 64, YTSCREEN_W, 40)];
-        [addressView setBackgroundColor:YTRandomColor];
+        [addressView setFrame:CGRectMake(-1, HNav, YTSCREEN_W+2, 40)];
         [addressView addTarget:self action:@selector(choiceAddress) forControlEvents:UIControlEventTouchUpInside];
+        [addressView setBackgroundColor:[UIColor whiteColor]];
+        [addressView.layer setBorderWidth:HLineSeparate];
+        [addressView.layer setBorderColor:YTColorLineSeparate];
         
         CGFloat width = (addressView.width-2) / 3;
         CGFloat height = addressView.height;
         
         UILabel *provinceLabel = [[UILabel alloc] init]; {
             [provinceLabel setFrame:CGRectMake(0, 0, width, height)];
-            [provinceLabel setBackgroundColor:YTRandomColor];
-            [provinceLabel setText:@"点击选择地址"];
+            [provinceLabel setFont:[UIFont systemFontOfSize:15]];
+            [provinceLabel setTextAlignment:NSTextAlignmentCenter];
+            [provinceLabel setText:@"请选择"];
         }
         [addressView addSubview:provinceLabel];
         self.provinceLabel = provinceLabel;
         
+        CGFloat lineY = 10.0f;
         CALayer *leftLineLayer = [[CALayer alloc] init]; {
-            [leftLineLayer setFrame:CGRectMake(provinceLabel.rightX, 0, 1, height)];
+            [leftLineLayer setFrame:CGRectMake(provinceLabel.rightX, lineY, 1, height-2*lineY)];
             [leftLineLayer setBackgroundColor:YTRandomColor.CGColor];
         }
         [addressView.layer addSublayer:leftLineLayer];
         
         UILabel *cityLabel = [[UILabel alloc] init]; {
             [cityLabel setFrame:CGRectMake(CGRectGetMaxX(leftLineLayer.frame), 0, width, height)];
-            [cityLabel setBackgroundColor:YTRandomColor];
+            [cityLabel setFont:[UIFont systemFontOfSize:15]];
+            [cityLabel setTextAlignment:NSTextAlignmentCenter];
+            [cityLabel setText:@"请选择"];
         }
         [addressView addSubview:cityLabel];
         self.cityLabel = cityLabel;
         
         CALayer *rightLineLayer = [[CALayer alloc] init]; {
-            [rightLineLayer setFrame:CGRectMake(cityLabel.rightX, 0, 1, height)];
+            [rightLineLayer setFrame:CGRectMake(cityLabel.rightX, lineY, 1, height-2*lineY)];
             [rightLineLayer setBackgroundColor:YTRandomColor.CGColor];
         }
         [addressView.layer addSublayer:rightLineLayer];
         
         UILabel *districtLabel = [[UILabel alloc] init]; {
             [districtLabel setFrame:CGRectMake(CGRectGetMaxX(rightLineLayer.frame), 0, width, height)];
-            [districtLabel setBackgroundColor:YTRandomColor];
+            [districtLabel setFont:[UIFont systemFontOfSize:15]];
+            [districtLabel setTextAlignment:NSTextAlignmentCenter];
+            [districtLabel setText:@"请选择"];
         }
         [addressView addSubview:districtLabel];
         self.districtLabel = districtLabel;
@@ -102,24 +112,27 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, addressView.bottomY, YTSCREEN_W, YTSCREEN_H - addressView.bottomY)
                                                           style:UITableViewStylePlain]; {
         
-        [tableView setBackgroundColor:YTRandomColor];
+        [tableView setBackgroundColor:YTColorBackground];
         [tableView setDelegate:self];
         [tableView setDataSource:self];
-        
+        [tableView setTableFooterView:[[UIView alloc] init]];
+        [tableView setMj_header:[MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self addressPickerDidSelectedQueryAddress:nil];
+        }]];
+        [tableView.mj_header beginRefreshing];
     }
     [self.view addSubview:tableView];
     self.tableView = tableView;
 }
 - (void)choiceAddress {
     
-    self.selectedProviceIdx = 0;
-    self.selectedCityIdx = 0;
-    self.selectedDistrictIdx = 0;
-    
     YTAddressPickerView *pickerView = [[YTAddressPickerView alloc] init];
     [pickerView setDelegate:self];
     [pickerView showPikerView];
     
+    [pickerView.picker selectRow:self.selectedProviceIdx inComponent:0 animated:YES];
+    [pickerView.picker selectRow:self.selectedCityIdx inComponent:1 animated:YES];
+    [pickerView.picker selectRow:self.selectedDistrictIdx inComponent:2 animated:YES];
 }
 
 #pragma mark - UITableViewDelegate UITableDateSoruceDelegate
@@ -136,6 +149,10 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseId];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell.textLabel setTextColor:YTColorGrayText];
+        [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
+        [cell.detailTextLabel setTextColor:YTColorTintText];
+        [cell.detailTextLabel setFont:[UIFont systemFontOfSize:12]];
     }
     
     [cell.textLabel setText:[@"邮编：" stringByAppendingString:postCode.postNumber]];
@@ -273,9 +290,11 @@
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     [mgr GET:@"http://v.juhe.cn/postcode/search" parameters:parameters  progress:nil
      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         [self.tableView.mj_header endRefreshing];
          self.postCodes = [YTPostCode mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
          [self.tableView reloadData];
      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+         [self.tableView.mj_header endRefreshing];
          NSLog(@"error:%@", error);
      }];
 }

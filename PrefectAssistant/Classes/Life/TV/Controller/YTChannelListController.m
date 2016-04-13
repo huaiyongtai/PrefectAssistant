@@ -24,7 +24,7 @@
     
     self.title = @[@"央视", @"卫视", @"数字", @"城市", @"CETV", @"原创"][[self.categoryId intValue]-1];
     
-    [self.tableView setBackgroundColor:YTRandomColor];
+    [self.tableView setBackgroundColor:YTColorBackground];
     [self.tableView setTableFooterView:[[UIView alloc] init]];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadTVPlaybillFromNetwork];
@@ -62,6 +62,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseId];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
     cell.textLabel.text = tvShow.channelName;
     return cell;

@@ -125,7 +125,6 @@
     
     YTCookDetailController *cookDetailVC = [YTCookDetailController cookDetailVCWithDish:self.dishes[indexPath.row]];
     [self.navigationController pushViewController:cookDetailVC animated:YES];
-    NSLog(@"%@", self.dishes[indexPath.row].name);
     
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

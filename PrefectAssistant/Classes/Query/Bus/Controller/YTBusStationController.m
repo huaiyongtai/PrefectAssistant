@@ -11,6 +11,7 @@
 #import "YTBusLineCell.h"
 #import "YTBusStation.h"
 #import "YTBusLine.h"
+#import <MJRefresh.h>
 
 @interface YTBusStationController ()
 
@@ -25,9 +26,12 @@
     [super viewDidLoad];
     
     self.title = @"公交";
-    [self.view setBackgroundColor:YTRandomColor];
+    [self.view setBackgroundColor:YTColorBackground];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
+    [self.tableView setMj_header:[MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadBusDataFromNetwork];
+    }]];
+    [self.tableView.mj_header beginRefreshing];
     [self loadBusDataFromNetwork];
 }
 
@@ -54,9 +58,11 @@
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     [mgr GET:url parameters:parameters  progress:nil
      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         [self.tableView.mj_header endRefreshing];
          self.busStations = [YTBusStation mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
          [self.tableView reloadData];
-     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {         
+         [self.tableView.mj_header endRefreshing];
          NSLog(@"error:%@", error);
      }];
 }

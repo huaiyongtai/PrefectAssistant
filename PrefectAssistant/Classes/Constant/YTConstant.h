@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark - 常量
+extern const float HLineSeparate;   //分割线
+extern const float HNav;       //导航高度
+extern const float HMargin;    //标准间距
+
 #pragma mark - 百度
 //http://apistore.baidu.com/astore/classificationservicelist.html
 

@@ -37,87 +37,105 @@
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self == nil) return nil;
     
-    //Vertical Horizontal
-    CGFloat verticalMargin = 5; //垂直间距
-    CGFloat horizontalMargin = 8;  //水平间距
-    
-    CGFloat height = (YTBusStationHeight-2*verticalMargin) / 3;
-    CGFloat width = (YTSCREEN_W - 2*horizontalMargin) / 4;
-    
-    //首车 列
-    UILabel *fromLabel = [[UILabel alloc] init]; {
-        [fromLabel setText:@"首车"];
-        [fromLabel setFrame:CGRectMake(horizontalMargin, verticalMargin, width, height)];
-        [fromLabel setTextAlignment:NSTextAlignmentRight];
-        [fromLabel setBackgroundColor:YTRandomColor];
+    UIView *containView = [[UIView alloc] init]; {
+        //Vertical Horizontal
+        CGFloat verticalMargin = 5; //垂直间距
+        CGFloat horizontalMargin = 5;  //水平间距
+        
+        CGFloat height = (YTBusStationHeight-verticalMargin) / 3;
+        CGFloat width = (YTSCREEN_W - 2*horizontalMargin) / 3;
+        
+        //首车 列
+        UILabel *fromLabel = [[UILabel alloc] init]; {
+            [fromLabel setText:@"首车"];
+            [fromLabel setFrame:CGRectMake(horizontalMargin, 0, width, height)];
+            [fromLabel setTextAlignment:NSTextAlignmentRight];
+            [fromLabel setFont:[UIFont systemFontOfSize:15]];
+        }
+        [containView addSubview:fromLabel];
+        
+        UILabel *fromNameLabel = [[UILabel alloc] init]; {
+            [fromNameLabel setFrame:CGRectMake(horizontalMargin, fromLabel.bottomY, width, height)];
+            [fromNameLabel setTextAlignment:NSTextAlignmentRight];
+            [fromNameLabel setTextColor:YTColorGrayText];
+            [fromNameLabel setFont:[UIFont systemFontOfSize:12]];
+        }
+        [containView addSubview:fromNameLabel];
+        self.fromNameLabel = fromNameLabel;
+        
+        UILabel *fromTimeLabel = [[UILabel alloc] init]; {
+            [fromTimeLabel setFrame:CGRectMake(horizontalMargin, fromNameLabel.bottomY, width, height)];
+            [fromTimeLabel setTextAlignment:NSTextAlignmentRight];
+            [fromTimeLabel setTextColor:YTColorTintText];
+            [fromTimeLabel setFont:[UIFont systemFontOfSize:12]];
+        }
+        [containView addSubview:fromTimeLabel];
+        self.fromTimeLabel = fromTimeLabel;
+        
+        //中间
+        CGFloat adjustH = height*0.2;
+        UILabel *nameLabel = [[UILabel alloc] init]; {
+            [nameLabel setFrame:CGRectMake(fromLabel.rightX, 0, width, height + adjustH)];
+            [nameLabel setTextAlignment:NSTextAlignmentCenter];
+            [nameLabel setFont:[UIFont systemFontOfSize:15]];
+        }
+        [containView addSubview:nameLabel];
+        self.nameLabel = nameLabel;
+        
+        UIImageView *directionView = [[UIImageView alloc] init]; {
+            [directionView setFrame:CGRectMake(nameLabel.x, nameLabel.bottomY, width, height - 2*adjustH)];
+            [directionView setContentMode:UIViewContentModeScaleAspectFit];
+        }
+        [containView addSubview:directionView];
+        UILabel *lengthLabel = [[UILabel alloc] init]; {
+            [lengthLabel setFrame:CGRectMake(directionView.x, directionView.bottomY, width, height + adjustH)];
+            [lengthLabel setTextAlignment:NSTextAlignmentCenter];
+            [lengthLabel setTextColor:YTColorTintText];
+            [lengthLabel setFont:[UIFont systemFontOfSize:12]];
+        }
+        [containView addSubview:lengthLabel];
+        self.lengthLabel = lengthLabel;
+        
+        //末车 列
+        UILabel *endLabel = [[UILabel alloc] init]; {
+            [endLabel setText:@"末车"];
+            [endLabel setFrame:CGRectMake(nameLabel.rightX, 0, width, height)];
+            [endLabel setTextAlignment:NSTextAlignmentLeft];
+            [endLabel setFont:[UIFont systemFontOfSize:15]];
+        }
+        [containView addSubview:endLabel];
+        
+        UILabel *endNameLabel = [[UILabel alloc] init]; {
+            [endNameLabel setFrame:CGRectMake(endLabel.x, endLabel.bottomY, width, height)];
+            [endNameLabel setTextAlignment:NSTextAlignmentLeft];
+            [endNameLabel setTextColor:YTColorGrayText];
+            [endNameLabel setFont:[UIFont systemFontOfSize:12]];
+        }
+        [containView addSubview:endNameLabel];
+        self.endNameLabel = endNameLabel;
+        
+        UILabel *endTimeLabel = [[UILabel alloc] init]; {
+            [endTimeLabel setFrame:CGRectMake(endNameLabel.x, endNameLabel.bottomY, width, height)];
+            [endTimeLabel setTextAlignment:NSTextAlignmentLeft];
+            [endTimeLabel setTextColor:YTColorTintText];
+            [endTimeLabel setFont:[UIFont systemFontOfSize:12]];
+        }
+        [containView addSubview:endTimeLabel];
+        self.endTimeLabel = endTimeLabel;
+        
+        [containView setBackgroundColor:[UIColor whiteColor]];
+        [containView setFrame:CGRectMake(0, verticalMargin, YTSCREEN_W, YTBusStationHeight-verticalMargin)];
     }
-    [self.contentView addSubview:fromLabel];
+    [self.contentView addSubview:containView];
     
-    UILabel *fromNameLabel = [[UILabel alloc] init]; {
-        [fromNameLabel setFrame:CGRectMake(horizontalMargin, fromLabel.bottomY, width, height)];
-        [fromNameLabel setTextAlignment:NSTextAlignmentRight];
-        [fromNameLabel setBackgroundColor:YTRandomColor];
-    }
-    [self.contentView addSubview:fromNameLabel];
-    self.fromNameLabel = fromNameLabel;
+    [self.contentView.layer addSublayer:({
+        CALayer *lineLayer = [CALayer layer];
+        [lineLayer setBackgroundColor:YTColorLineSeparate];
+        [lineLayer setFrame:CGRectMake(0, YTBusStationHeight-HLineSeparate, YTSCREEN_W, HLineSeparate)];
+        lineLayer;
+    })];
     
-    UILabel *fromTimeLabel = [[UILabel alloc] init]; {
-        [fromTimeLabel setFrame:CGRectMake(horizontalMargin, fromNameLabel.bottomY, width, height)];
-        [fromTimeLabel setTextAlignment:NSTextAlignmentRight];
-        [fromTimeLabel setBackgroundColor:YTRandomColor];
-    }
-    [self.contentView addSubview:fromTimeLabel];
-    self.fromTimeLabel = fromTimeLabel;
-    
-    //中间
-    CGFloat adjustH = height*0.2;
-    UILabel *nameLabel = [[UILabel alloc] init]; {
-        [nameLabel setFrame:CGRectMake(fromLabel.rightX, verticalMargin, 2*width, height + adjustH)];
-        [nameLabel setTextAlignment:NSTextAlignmentCenter];
-        [nameLabel setBackgroundColor:YTRandomColor];
-    }
-    [self.contentView addSubview:nameLabel];
-    self.nameLabel = nameLabel;
-    
-    UIImageView *directionView = [[UIImageView alloc] init]; {
-        [directionView setFrame:CGRectMake(nameLabel.x, nameLabel.bottomY, 2*width, height - 2*adjustH)];
-        [directionView setContentMode:UIViewContentModeScaleAspectFit];
-        [directionView setBackgroundColor:YTRandomColor];
-    }
-    [self.contentView addSubview:directionView];
-    UILabel *lengthLabel = [[UILabel alloc] init]; {
-        [lengthLabel setFrame:CGRectMake(directionView.x, directionView.bottomY, 2*width, height + adjustH)];
-        [lengthLabel setTextAlignment:NSTextAlignmentCenter];
-        [lengthLabel setBackgroundColor:YTRandomColor];
-    }
-    [self.contentView addSubview:lengthLabel];
-    self.lengthLabel = lengthLabel;
-    
-    //末车 列
-    UILabel *endLabel = [[UILabel alloc] init]; {
-        [endLabel setText:@"末车"];
-        [endLabel setFrame:CGRectMake(nameLabel.rightX, verticalMargin, width, height)];
-        [endLabel setTextAlignment:NSTextAlignmentLeft];
-        [endLabel setBackgroundColor:YTRandomColor];
-    }
-    [self.contentView addSubview:endLabel];
-    
-    UILabel *endNameLabel = [[UILabel alloc] init]; {
-        [endNameLabel setFrame:CGRectMake(endLabel.x, endLabel.bottomY, width, height)];
-        [endNameLabel setTextAlignment:NSTextAlignmentLeft];
-        [endNameLabel setBackgroundColor:YTRandomColor];
-    }
-    [self.contentView addSubview:endNameLabel];
-    self.endNameLabel = endNameLabel;
-    
-    UILabel *endTimeLabel = [[UILabel alloc] init]; {
-        [endTimeLabel setFrame:CGRectMake(endNameLabel.x, endNameLabel.bottomY, width, height)];
-        [endTimeLabel setTextAlignment:NSTextAlignmentLeft];
-        [endTimeLabel setBackgroundColor:YTRandomColor];
-    }
-    [self.contentView addSubview:endTimeLabel];
-    self.endTimeLabel = endTimeLabel;
-
+    [self.contentView setBackgroundColor:YTColorBackground];
     return self;
 }
 

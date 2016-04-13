@@ -20,5 +20,6 @@
 @interface YTAddressPickerView : UIView
 
 @property (nonatomic, weak) id <UIPickerViewDelegate, UIPickerViewDataSource, YTAddressPickerViewDelegate> delegate;
+@property (nonatomic, weak, readonly) UIPickerView *picker;
 - (void)showPikerView;
 @end

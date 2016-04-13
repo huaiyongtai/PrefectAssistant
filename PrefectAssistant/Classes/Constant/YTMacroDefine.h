@@ -21,4 +21,12 @@
 #define YTSCREEN_H      [UIScreen mainScreen].bounds.size.height
 #define YTSystemVersion [[[UIDevice currentDevice] systemVersion] floatValue]
 
+
+#pragma mark -
+#define YTColorLineSeparate   YTColor(188, 186, 193).CGColor
+#define YTColorQueryButton    YTColor(35, 119, 195)
+#define YTColorBackground     YTColor(235, 235, 241)
+#define YTColorGrayText       YTColor(80, 80, 80)
+#define YTColorTintText       YTColor(130, 130, 130)
+
 #endif /* YTMacroDefine_h */
