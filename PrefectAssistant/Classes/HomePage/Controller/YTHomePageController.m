@@ -71,7 +71,8 @@
                                                           itemTitles:@[@"菜谱", @"电视", @"笑话", @"历时"]
                                                           themeColor:YTColor(251, 84, 66)
                                                 catalogSelectedBlock:^(NSString *title) {
-                                                    NSLog(@"点击了%@", title);
+                                                    [self.navigationController pushViewController:[[YTCookBookController alloc] init]
+                                                                                         animated:YES];
                                                 } itemSelectedBlock:^(NSInteger index, NSString *title) {
                                                     switch (index) {
                                                         case 0:
@@ -95,11 +96,12 @@
     [lifeView setFrame:CGRectMake(0, roundView.bottomY, YTSCREEN_W, 100)];
     [containView addSubview:lifeView];
     
-    YTModuleView *queryView = [YTModuleView moduleVieWithCatalogTitle:@"娱乐"
+    YTModuleView *queryView = [YTModuleView moduleVieWithCatalogTitle:@"工具"
                                                              itemTitles:@[@"驾考", @"邮编", @"翻译", @"解梦"]
                                                              themeColor:YTColor(76, 136, 231)
                                                    catalogSelectedBlock:^(NSString *title) {
-                                                       NSLog(@"点击了%@", title);
+                                                       [self.navigationController pushViewController:[[YTDriverSubjectController alloc] init]
+                                                                                            animated:YES];
                                                    } itemSelectedBlock:^(NSInteger index, NSString *title) {
                                                        switch (index) {
                                                            case 0:
@@ -128,7 +130,8 @@
                                                              itemTitles:@[@"公交", @"快递", @"火车", @"天气"]
                                                              themeColor:YTColor(88, 188, 173)
                                                    catalogSelectedBlock:^(NSString *title) {
-                                                       NSLog(@"点击了%@", title);
+                                                       [self.navigationController pushViewController:[[YTBusQueryController alloc] init]
+                                                                                            animated:YES];
                                                    } itemSelectedBlock:^(NSInteger index, NSString *title) {
                                                        switch (index) {
                                                            case 0:

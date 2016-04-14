@@ -300,7 +300,6 @@ static const CGFloat YTTextViewMinH = 70;
     progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self resultInfoTextString:[responseObject[@"retData"][@"trans_result"] firstObject][@"dst"]];
-        NSLog(@"%@", responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@", error);
     }];
