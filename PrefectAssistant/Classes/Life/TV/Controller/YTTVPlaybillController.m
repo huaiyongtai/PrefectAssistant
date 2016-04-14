@@ -80,6 +80,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseId];
         [cell.detailTextLabel setFont:[UIFont systemFontOfSize:14]];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     cell.textLabel.text = tvPlaybill.time;
     cell.detailTextLabel.text = tvPlaybill.pName;

@@ -22,18 +22,18 @@
     
     CGFloat topMargin = 10; //分割
     CGFloat horizontalMargin = 10;  //水平间距
-    self.titleF = CGRectMake(horizontalMargin, topMargin, YTSCREEN_W-2*horizontalMargin, 30);
+    self.titleF = CGRectMake(horizontalMargin, 0, YTSCREEN_W-2*horizontalMargin, 27);
     self.desF = ({
     
         CGSize desSize = [self.des boundingRectWithSize:CGSizeMake(YTSCREEN_W-2*horizontalMargin, CGFLOAT_MAX)
                                                 options:NSStringDrawingUsesLineFragmentOrigin
                                              attributes:@{NSFontAttributeName : YTDreamDesFont}
                                                 context:nil].size;
-        CGRectMake(horizontalMargin, CGRectGetMaxY(self.titleF), YTSCREEN_W-2*horizontalMargin, desSize.height);
+        CGRectMake(horizontalMargin, CGRectGetMaxY(self.titleF), YTSCREEN_W-2*horizontalMargin, desSize.height + topMargin);
     });
     
     
-    self.totalHeight = CGRectGetMaxY(self.desF);
+    self.totalHeight = CGRectGetMaxY(self.desF) + topMargin;
 }
 
 

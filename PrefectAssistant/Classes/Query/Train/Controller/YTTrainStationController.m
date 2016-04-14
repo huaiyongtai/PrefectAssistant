@@ -25,7 +25,8 @@
     [super viewDidLoad];
     
     self.title = @"车站车次信息";
-    
+   
+    self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadTrainStationInfoFromNetwork];
     }];

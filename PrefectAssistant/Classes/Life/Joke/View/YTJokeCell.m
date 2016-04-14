@@ -70,8 +70,10 @@
         [self.urlImgView sd_setImageWithURL:[NSURL URLWithString:joke.url]];
         [self.urlImgView setFrame:joke.urlF];
         [self.contentLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.contentLabel setTextColor:[UIColor blackColor]];
     } else {
         [self.contentLabel setTextAlignment:NSTextAlignmentLeft];
+        [self.contentLabel setTextColor:YTColorGrayText];
     }
 }
 

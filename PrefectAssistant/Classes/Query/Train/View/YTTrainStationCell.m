@@ -61,7 +61,6 @@ const CGFloat YTTrainStationCellH = 55;
     UILabel *codeLabel = [[UILabel alloc] init]; {
         [codeLabel setFrame:CGRectMake(margin, 0, codeLabelW, height)];
         [codeLabel setNumberOfLines:0];
-        [codeLabel setBackgroundColor:YTRandomColor];
     }
     self.codeLabel = codeLabel;
     [self.contentView addSubview:codeLabel];
@@ -70,31 +69,28 @@ const CGFloat YTTrainStationCellH = 55;
     UILabel *deptStationLabel = [[UILabel alloc] init]; {
         [deptStationLabel setFrame:CGRectMake(codeLabel.rightX, 0, width, height)];
         [deptStationLabel setNumberOfLines:0];
-        [deptStationLabel setBackgroundColor:YTRandomColor];
     }
     self.deptStationLabel = deptStationLabel;
     [self.contentView addSubview:deptStationLabel];
    
     //列车
     CGFloat centerH = (height - 2*margin) / 3;
-    CGFloat adjustH = 1;
+    CGFloat adjustH = 0.5 ;
     UILabel *stationLabel = [[UILabel alloc] init]; {
         [stationLabel setFrame:CGRectMake(deptStationLabel.rightX, margin, width, centerH+adjustH)];
-        [stationLabel setBackgroundColor:YTRandomColor];
         [stationLabel setFont:[UIFont systemFontOfSize:12]];
         [stationLabel setTextAlignment:NSTextAlignmentCenter];
     }
     [self.contentView addSubview:stationLabel];
     self.stationLabel = stationLabel;
     UIImageView *directionImageView = [[UIImageView alloc] init]; {
-        [directionImageView setImage:[UIImage imageNamed:@"chack"]];
+        [directionImageView setImage:[UIImage imageNamed:@"direction"]];
         [directionImageView setFrame:CGRectMake(stationLabel.x, stationLabel.bottomY, width, centerH-2*adjustH)];
     }
     [self.contentView addSubview:directionImageView];
     UILabel *intervalLabel = [[UILabel alloc] init]; {
         [intervalLabel setFrame:CGRectMake(stationLabel.x, directionImageView.bottomY, width, centerH+adjustH)];
         [intervalLabel setTextAlignment:NSTextAlignmentCenter];
-        [intervalLabel setBackgroundColor:YTRandomColor];
         [intervalLabel setFont:[UIFont systemFontOfSize:10]];
     }
     [self.contentView addSubview:intervalLabel];
@@ -104,7 +100,6 @@ const CGFloat YTTrainStationCellH = 55;
         [arriStationLabel setFrame:CGRectMake(stationLabel.rightX, 0, width, height)];
         [arriStationLabel setTextAlignment:NSTextAlignmentRight];
         [arriStationLabel setNumberOfLines:0];
-        [arriStationLabel setBackgroundColor:YTRandomColor];
     }
     self.arriStationLabel = arriStationLabel;
     [self.contentView addSubview:arriStationLabel];
@@ -118,9 +113,10 @@ const CGFloat YTTrainStationCellH = 55;
     [self.codeLabel setAttributedText:({
         NSMutableAttributedString *mAttString = [[NSMutableAttributedString alloc]
                                                  initWithString:[trainInfo.code stringByAppendingFormat:@"\n%@", trainInfo.tType]];
-        [mAttString setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:15]}
+        [mAttString setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:13]}
                             range:NSMakeRange(0, trainInfo.code.length)];
-        [mAttString setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}
+        [mAttString setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],
+                                    NSForegroundColorAttributeName:YTColorGrayText}
                             range:NSMakeRange(trainInfo.code.length+1, trainInfo.tType.length)];
         mAttString;
     })];
@@ -132,7 +128,7 @@ const CGFloat YTTrainStationCellH = 55;
         [mAttString setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}
                             range:NSMakeRange(0, trainInfo.deptStation.length)];
         [mAttString setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],
-                                    NSForegroundColorAttributeName:YTColor(100, 100, 100)}
+                                    NSForegroundColorAttributeName:YTColorTintText}
                             range:NSMakeRange(trainInfo.deptStation.length+1, trainInfo.deptTime.length)];
         mAttString;
     })];
@@ -143,7 +139,7 @@ const CGFloat YTTrainStationCellH = 55;
         [mAttString setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}
                             range:NSMakeRange(0, trainInfo.arriStation.length)];
         [mAttString setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],
-                                    NSForegroundColorAttributeName:YTColor(100, 100, 100)}
+                                    NSForegroundColorAttributeName:YTColorTintText}
                             range:NSMakeRange(trainInfo.arriStation.length+1, trainInfo.arriTime.length)];
         mAttString;
     })];
@@ -155,6 +151,6 @@ const CGFloat YTTrainStationCellH = 55;
         }
         station;
     })];
-    [self.intervalLabel setText:[NSString stringWithFormat:@"总用时:%@", trainInfo.interval]];
+    [self.intervalLabel setText:[NSString stringWithFormat:@"%@", trainInfo.interval]];
 }
 @end

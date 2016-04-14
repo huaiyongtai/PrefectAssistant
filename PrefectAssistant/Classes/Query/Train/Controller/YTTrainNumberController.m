@@ -63,7 +63,7 @@
     
     UIView *headerView = [[UIView alloc] init]; {
         [headerView setHeight:80];
-        [headerView setBackgroundColor:YTRandomColor];
+        [headerView setBackgroundColor:YTColorBackground];
         CGFloat margin = 10;
         CGFloat width = (YTSCREEN_W - 2*margin) / 3;
         CGFloat height = headerView.height;
@@ -71,7 +71,7 @@
         //左
         UILabel *startStaionLabel = [[UILabel alloc] init]; {
             [startStaionLabel setFrame:CGRectMake(margin, 0, width, height)];
-            [startStaionLabel setText:self.trainQuery.trainNo];
+            [startStaionLabel setTextAlignment:NSTextAlignmentCenter];
             [startStaionLabel setNumberOfLines:0];
         }
         self.startStaionLabel = startStaionLabel;
@@ -80,7 +80,7 @@
         //右
         UILabel *endStaionLabel = [[UILabel alloc] init]; {
             [endStaionLabel setFrame:CGRectMake(margin+2*width, 0, width, height)];
-            [endStaionLabel setTextAlignment:NSTextAlignmentRight];
+            [endStaionLabel setTextAlignment:NSTextAlignmentCenter];
             [endStaionLabel setNumberOfLines:0];
         }
         self.endStaionLabel = endStaionLabel;
@@ -96,7 +96,7 @@
         }
         [headerView addSubview:trainNoLabel];
         UIImageView *directionImageView = [[UIImageView alloc] init]; {
-            [directionImageView setImage:[UIImage imageNamed:@"chack"]];
+            [directionImageView setImage:[UIImage imageNamed:@"direction"]];
             [directionImageView setFrame:CGRectMake(trainNoLabel.x, trainNoLabel.bottomY, width, centerH-2*adjustH)];
         }
         [headerView addSubview:directionImageView];
@@ -153,7 +153,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 30;
+    return 25;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     

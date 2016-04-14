@@ -15,6 +15,8 @@
 
 @property (nonatomic, weak) UILabel *desLabel;
 
+@property (nonatomic, weak) UIView *containView;
+
 @end
 
 @implementation YTDreamCell
@@ -36,20 +38,36 @@
     
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    UILabel *titleLabel = [[UILabel alloc] init]; {
-        [titleLabel setTextColor:YTColorGrayText];
-        [titleLabel setNumberOfLines:0];
+    UIView *containView = [[UIView alloc] init]; {
+
+        [containView setBackgroundColor:[UIColor whiteColor]];
+        [containView.layer addSublayer:({
+            CALayer *lineLayer = [CALayer layer];
+            [lineLayer setBackgroundColor:YTColorLineSeparate];
+            [lineLayer setFrame:CGRectMake(0, 0, YTSCREEN_W, HLineSeparate)];
+            lineLayer;
+        })];
+        
+        UILabel *titleLabel = [[UILabel alloc] init]; {
+            [titleLabel setTextColor:YTColorGrayText];
+            [titleLabel setNumberOfLines:0];
+        }
+        [containView addSubview:titleLabel];
+        self.titleLabel = titleLabel;
+        
+        UILabel *desLabel = [[UILabel alloc] init]; {
+            [desLabel setTextColor:YTColorTintText];
+            [desLabel setNumberOfLines:0];
+            [desLabel setFont:YTDreamDesFont];
+        }
+        [containView addSubview:desLabel];
+        self.desLabel = desLabel;
     }
-    [self.contentView addSubview:titleLabel];
-    self.titleLabel = titleLabel;
+    [self.contentView addSubview:containView];
+    self.containView = containView;
     
-    UILabel *desLabel = [[UILabel alloc] init]; {
-        [desLabel setTextColor:YTColorTintText];
-        [desLabel setNumberOfLines:0];
-        [desLabel setFont:YTDreamDesFont];
-    }
-    [self.contentView addSubview:desLabel];
-    self.desLabel = desLabel;
+    [self.contentView setBackgroundColor:YTColorBackground];
+    
     return self;
 }
 
@@ -62,6 +80,8 @@
     
     [self.desLabel setText:dream.des];
     [self.desLabel setFrame:dream.desF];
+    
+    [self.containView setFrame:CGRectMake(0, 10, YTSCREEN_W, self.desLabel.bottomY)];
 }
 
 @end

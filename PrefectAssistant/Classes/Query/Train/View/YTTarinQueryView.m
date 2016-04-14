@@ -63,8 +63,9 @@
             UIButton *exchangeBtn = [UIButton buttonWithType:UIButtonTypeCustom]; {
                 [exchangeBtn setFrame:CGRectMake(startStationFiled.rightX, 0, width, height)];
                 [exchangeBtn addTarget:self action:@selector(exchangeBetweentStartAndEnd) forControlEvents:UIControlEventTouchUpInside];
-                [exchangeBtn setTitle:@"交换" forState:UIControlStateNormal];
+                [exchangeBtn setImage:[UIImage imageNamed:@"exchange"] forState:UIControlStateNormal];
                 [exchangeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [exchangeBtn setTitleColor:YTColorGrayText forState:UIControlStateNormal];
             }
             [queryAddressView addSubview:exchangeBtn];
             
@@ -167,6 +168,7 @@
             UILabel *departMothLabel = [[UILabel alloc] init]; {
                 [departMothLabel setFrame:CGRectMake(width, 0, width, height)];
                 [departMothLabel setTextAlignment:NSTextAlignmentCenter];
+                [departMothLabel setTextColor:YTColorGrayText];
             }
             self.departMothLabel = departMothLabel;
             [departTimeView addSubview:departMothLabel];
@@ -174,6 +176,7 @@
             UILabel *departWeekLabel = [[UILabel alloc] init]; {
                 [departWeekLabel setFrame:CGRectMake(departMothLabel.rightX, 0, width, height)];
                 [departWeekLabel setTextAlignment:NSTextAlignmentCenter];
+                [departWeekLabel setTextColor:YTColorGrayText];
             }
             self.departWeekLabel = departWeekLabel;
             [departTimeView addSubview:departWeekLabel];

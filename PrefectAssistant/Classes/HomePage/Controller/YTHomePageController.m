@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    [self.view setBackgroundColor:YTRandomColor];
+    [self.view setBackgroundColor:YTColorBackground];
     
     self.title = @"百分助理";
     
@@ -59,45 +59,45 @@
     
     UIScrollView *containView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     
-    YTRoundView *roundView = [YTRoundView roundViewWitAdImageInfos:@[@"domeImage0", @"domeImage1.jpg", @"domeImage2.jpg", @"domeImage3.jpg"]
+    YTRoundView *roundView = [YTRoundView roundViewWitAdImageInfos:@[@"adImage0", @"adImage1", @"adImage2", @"adImage3"]
                                                           adTitles:nil didSelected:^(NSInteger index, id adInfo) {
                                                               NSLog(@"您选择了第 %li 张图片", index);
                                                           }];
     [roundView setShowPageIndicator:YES];
-    [roundView setFrame:CGRectMake(0, 64, YTSCREEN_W, 150)];
+    [roundView setFrame:CGRectMake(0, HNav, YTSCREEN_W, 180)];
     [containView addSubview:roundView];
     
     YTModuleView *lifeView = [YTModuleView moduleVieWithCatalogTitle:@"生活"
-                                                            itemTitles:@[@"菜谱", @"电视", @"笑话", @"历时"]
-                                                            themeColor:YTRandomColor
-                                                  catalogSelectedBlock:^(NSString *title) {
-                                                      NSLog(@"点击了%@", title);
-                                                  } itemSelectedBlock:^(NSInteger index, NSString *title) {
-                                                      switch (index) {
-                                                          case 0:
-                                                              [self.navigationController pushViewController:[[YTCookBookController alloc] init]
-                                                                                                   animated:YES];
-                                                              break;
-                                                          case 1:
-                                                              [self.navigationController pushViewController:[[YTTVCategoryController alloc] init]
-                                                                                                   animated:YES];
-                                                              break;
-                                                          case 2:
-                                                              [self.navigationController pushViewController:[[YTJokeListController alloc] init]
-                                                                                                   animated:YES];
-                                                              break;
-                                                          case 3:
-                                                              [self.navigationController pushViewController:[[YTHistoryQueryController alloc] init]
-                                                                                                   animated:YES];
-                                                              break;
-                                                      }
-                                                  }];
+                                                          itemTitles:@[@"菜谱", @"电视", @"笑话", @"历时"]
+                                                          themeColor:YTColor(251, 84, 66)
+                                                catalogSelectedBlock:^(NSString *title) {
+                                                    NSLog(@"点击了%@", title);
+                                                } itemSelectedBlock:^(NSInteger index, NSString *title) {
+                                                    switch (index) {
+                                                        case 0:
+                                                            [self.navigationController pushViewController:[[YTCookBookController alloc] init]
+                                                                                                 animated:YES];
+                                                            break;
+                                                        case 1:
+                                                            [self.navigationController pushViewController:[[YTTVCategoryController alloc] init]
+                                                                                                 animated:YES];
+                                                            break;
+                                                        case 2:
+                                                            [self.navigationController pushViewController:[[YTJokeListController alloc] init]
+                                                                                                 animated:YES];
+                                                            break;
+                                                        case 3:
+                                                            [self.navigationController pushViewController:[[YTHistoryQueryController alloc] init]
+                                                                                                 animated:YES];
+                                                            break;
+                                                    }
+                                                }];
     [lifeView setFrame:CGRectMake(0, roundView.bottomY, YTSCREEN_W, 100)];
     [containView addSubview:lifeView];
     
     YTModuleView *queryView = [YTModuleView moduleVieWithCatalogTitle:@"娱乐"
                                                              itemTitles:@[@"驾考", @"邮编", @"翻译", @"解梦"]
-                                                             themeColor:YTRandomColor
+                                                             themeColor:YTColor(76, 136, 231)
                                                    catalogSelectedBlock:^(NSString *title) {
                                                        NSLog(@"点击了%@", title);
                                                    } itemSelectedBlock:^(NSInteger index, NSString *title) {
@@ -126,7 +126,7 @@
     
     YTModuleView *moduleView2 = [YTModuleView moduleVieWithCatalogTitle:@"查询"
                                                              itemTitles:@[@"公交", @"快递", @"火车", @"天气"]
-                                                             themeColor:YTRandomColor
+                                                             themeColor:YTColor(88, 188, 173)
                                                    catalogSelectedBlock:^(NSString *title) {
                                                        NSLog(@"点击了%@", title);
                                                    } itemSelectedBlock:^(NSInteger index, NSString *title) {

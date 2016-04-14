@@ -20,7 +20,7 @@
     
     YTTrainDetailView *trainDetailView = [[self alloc] init];
     trainDetailView.trainTimetableLabels = [NSMutableArray array];
-    
+    [trainDetailView setBackgroundColor:[UIColor whiteColor]];
     return trainDetailView;
 }
 
@@ -31,8 +31,10 @@
     
     while (6>self.trainTimetableLabels.count) {
         UILabel *rowTimeLabel = [[UILabel alloc] init];
-        [rowTimeLabel setBackgroundColor:YTRandomColor];
-        [rowTimeLabel setFont:[UIFont systemFontOfSize:11]];
+//        [rowTimeLabel setBackgroundColor:YTRandomColor];
+        [rowTimeLabel setFont:[UIFont systemFontOfSize:12]];
+        [rowTimeLabel setTextColor:YTColorGrayText];
+        [rowTimeLabel setTextAlignment:NSTextAlignmentCenter];
         [_trainTimetableLabels addObject:rowTimeLabel];
         [self addSubview:rowTimeLabel];
     }
@@ -52,7 +54,7 @@
     
     [super layoutSubviews];
     
-    CGFloat margin = 6;
+    CGFloat margin = 2;
     CGFloat width = (self.width-2*margin)/self.trainTimetableLabels.count;
     CGFloat height = self.height;
     [self.trainTimetableLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

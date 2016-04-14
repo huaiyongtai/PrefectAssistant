@@ -10,7 +10,7 @@
 #import "YTTrain.h"
 #import "YTTrainSeat.h"
 
-const CGFloat YTTrainHeaderViewH = 100;
+const CGFloat YTTrainHeaderViewH = 80;
 
 @interface YTTrainHeaderView ()
 
@@ -19,8 +19,8 @@ const CGFloat YTTrainHeaderViewH = 100;
 @property (nonatomic, weak) UILabel *durationLabel;
 
 @property (nonatomic, weak) UILabel *trainNoLabel;
-@property (nonatomic, weak) UILabel *fromLabel;
-@property (nonatomic, weak) UILabel *toLabel;
+@property (nonatomic, weak) UIButton *fromView;
+@property (nonatomic, weak) UIButton *toView;
 
 @property (nonatomic, weak) UILabel *basePriceLabel;
 
@@ -62,62 +62,81 @@ const CGFloat YTTrainHeaderViewH = 100;
     CGFloat horizontalMargin = 10;  //水平
     CGFloat verticalMargin = 8; //竖直
     CGFloat height = (YTTrainHeaderViewH-2*verticalMargin)/3;
-    CGFloat width = (YTSCREEN_W - 4*horizontalMargin) / 3;
+    CGFloat width = (YTSCREEN_W - 5*horizontalMargin) / 3;
     
     //第一列
     UILabel *durationLabel = [[UILabel alloc] init]; {
         [durationLabel setFrame:CGRectMake(horizontalMargin, verticalMargin, width, height)];
+        [durationLabel setFont:[UIFont systemFontOfSize:14]];
     }
     [self.contentView addSubview:durationLabel];
     self.durationLabel = durationLabel;
     
     UILabel *startTimeLabel = [[UILabel alloc] init]; {
         [startTimeLabel setFrame:CGRectMake(durationLabel.x, durationLabel.bottomY, width, height)];
+        [startTimeLabel setFont:[UIFont systemFontOfSize:14]];
+        [startTimeLabel setTextColor:YTColorGrayText];
     }
     [self.contentView addSubview:startTimeLabel];
     self.startTimeLabel = startTimeLabel;
     
     UILabel *endTimeLabel = [[UILabel alloc] init]; {
         [endTimeLabel setFrame:CGRectMake(startTimeLabel.x, startTimeLabel.bottomY, width, height)];
+        [endTimeLabel setFont:[UIFont systemFontOfSize:14]];
+        [endTimeLabel setTextColor:YTColorGrayText];
     }
     [self.contentView addSubview:endTimeLabel];
     self.endTimeLabel = endTimeLabel;
     
     //第二列
     UILabel *trainNoLabel = [[UILabel alloc] init]; {
-        [trainNoLabel setFont:[UIFont systemFontOfSize:14]];
+        [trainNoLabel setFont:[UIFont boldSystemFontOfSize:14]];
         [trainNoLabel setFrame:CGRectMake(durationLabel.rightX, verticalMargin, width, height)];
     }
     [self.contentView addSubview:trainNoLabel];
     self.trainNoLabel = trainNoLabel;
     
-    UILabel *fromLabel = [[UILabel alloc] init]; {
-        [fromLabel setFrame:CGRectMake(trainNoLabel.x, trainNoLabel.bottomY, width, height)];
+    UIButton *fromView = [[UIButton alloc] init]; {
+        [fromView setImage:[UIImage imageNamed:@"fromIcon"] forState:UIControlStateDisabled];
+        [fromView setFrame:CGRectMake(trainNoLabel.x, trainNoLabel.bottomY, width, height)];
+        [fromView setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [fromView setTitleEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 0)];
+        [fromView setTitleColor:YTColorGrayText forState:UIControlStateDisabled];
+        [fromView.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [fromView setEnabled:NO];
     }
-    [self.contentView addSubview:fromLabel];
-    self.fromLabel = fromLabel;
+    [self.contentView addSubview:fromView];
+    self.fromView = fromView;
     
-    UILabel *toLabel = [[UILabel alloc] init]; {
-        [toLabel setFrame:CGRectMake(fromLabel.x, fromLabel.bottomY, width, height)];
+    UIButton *toView = [[UIButton alloc] init]; {
+        [toView setImage:[UIImage imageNamed:@"endIcon"] forState:UIControlStateDisabled];
+        [toView setFrame:CGRectMake(fromView.x, fromView.bottomY, width, height)];
+        [toView setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [toView setTitleEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 0)];
+        [toView setTitleColor:YTColorGrayText forState:UIControlStateDisabled];
+        [toView.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [toView setEnabled:NO];
     }
-    [self.contentView addSubview:toLabel];
-    self.toLabel = toLabel;
+    [self.contentView addSubview:toView];
+    self.toView = toView;
     
     //第三列
     CGFloat colThreeHeight = height * 1.5;
     UILabel *basePriceLabel = [[UILabel alloc] init]; {
         [basePriceLabel setTextAlignment:NSTextAlignmentRight];
         [basePriceLabel setFrame:CGRectMake(trainNoLabel.rightX, verticalMargin, width, colThreeHeight)];
+        [basePriceLabel setFont:[UIFont systemFontOfSize:15]];
+        [basePriceLabel setTextColor:YTColorGrayText];
     }
     [self.contentView addSubview:basePriceLabel];
     self.basePriceLabel = basePriceLabel;
     UIButton *trainNumberBtn = [UIButton buttonWithType:UIButtonTypeCustom]; {
         [trainNumberBtn setFrame:CGRectMake(basePriceLabel.x, basePriceLabel.bottomY, width, colThreeHeight)];
         [trainNumberBtn setTitle:@"车次详情" forState:UIControlStateNormal];
-        [trainNumberBtn setBackgroundColor:YTRandomColor];
-        [trainNumberBtn.titleLabel setTextColor:YTColor(2, 2, 2)];
         [trainNumberBtn addTarget:self action:@selector(trainDetail) forControlEvents:UIControlEventTouchUpInside];
         [trainNumberBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [trainNumberBtn setTitleColor:YTColor(73, 147, 207) forState:UIControlStateNormal];
+        [trainNumberBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
     }
     [self.contentView addSubview:trainNumberBtn];
 
@@ -132,8 +151,8 @@ const CGFloat YTTrainHeaderViewH = 100;
     self.revealBtn = revealBtn;
     
     CALayer *lineLayer = [CALayer layer]; {
-        [lineLayer setFrame:CGRectMake(0, YTTrainHeaderViewH-0.5, YTSCREEN_W, 0.5)];
-        [lineLayer setBackgroundColor:YTColor(200, 200, 200).CGColor];
+        [lineLayer setFrame:CGRectMake(0, 0, YTSCREEN_W, 0.5)];
+        [lineLayer setBackgroundColor:YTColorLineSeparate];
     }
     [self.contentView.layer addSublayer:lineLayer];
     
@@ -149,12 +168,12 @@ const CGFloat YTTrainHeaderViewH = 100;
     [self.endTimeLabel setText:train.endTime];
     
     [self.trainNoLabel setText:[train.trainNo stringByAppendingString:train.trainType]];
-    [self.fromLabel setText:train.from];
-    [self.toLabel setText:train.to];
+    [self.fromView setTitle:train.from forState:UIControlStateDisabled];
+    [self.toView setTitle:train.to forState:UIControlStateDisabled];
     
     [self.basePriceLabel setText:({
         YTTrainSeat *seat = [train.seatInfos firstObject];
-        [NSString stringWithFormat:@"￥%@ 起售", seat.seatPrice];
+        [NSString stringWithFormat:@"￥%@起", seat.seatPrice];
     })];
     
     self.revealBtn.selected = train.isRevealSeatInfos;

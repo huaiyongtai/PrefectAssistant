@@ -57,7 +57,7 @@ static const CGFloat YTTextViewMinH = 70;
         CGFloat choiceLanguageW = (containView.width-2*margin) / 3;
         CGFloat choiceLanguageH = 35;
         YTChoiceLanguageBtn *originBtn = [[YTChoiceLanguageBtn alloc] init]; {
-            [originBtn setLanguage:[YTLanguageCode languageCodeWithName:@"英语" code:@"en"]];
+            [originBtn setLanguage:[YTLanguageCode languageCodeWithName:@"中文" code:@"zh"]];
             [originBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
             [originBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_up"] forState:UIControlStateSelected];
             [originBtn setFrame:CGRectMake(margin, topMargin, choiceLanguageW, choiceLanguageH)];
@@ -67,7 +67,7 @@ static const CGFloat YTTextViewMinH = 70;
         self.originBtn = originBtn;
         
         UIButton *exchengeBtn = [[UIButton alloc] init]; {
-            [exchengeBtn setTitle:@"交换" forState:UIControlStateNormal];
+            [exchengeBtn setImage:[UIImage imageNamed:@"exchange"] forState:UIControlStateNormal];
             [exchengeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [exchengeBtn setFrame:CGRectMake(originBtn.rightX, originBtn.y, choiceLanguageW, choiceLanguageH)];
             [exchengeBtn addTarget:self action:@selector(exchangeChoiceConetent) forControlEvents:UIControlEventTouchUpInside];
@@ -75,7 +75,7 @@ static const CGFloat YTTextViewMinH = 70;
         [containView addSubview:exchengeBtn];
         
         YTChoiceLanguageBtn *destinationBtn = [[YTChoiceLanguageBtn alloc] init]; {
-            [destinationBtn setLanguage:[YTLanguageCode languageCodeWithName:@"中文" code:@"zh"]];
+            [destinationBtn setLanguage:[YTLanguageCode languageCodeWithName:@"英语" code:@"en"]];
             [destinationBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
             [destinationBtn setImage:[UIImage imageNamed:@"navigationbar_arrow_up"] forState:UIControlStateSelected];
             [destinationBtn setFrame:CGRectMake(exchengeBtn.rightX, exchengeBtn.y, choiceLanguageW, choiceLanguageH)];
@@ -147,7 +147,7 @@ static const CGFloat YTTextViewMinH = 70;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
+
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         [self convertOriginTextToResultText];
@@ -285,6 +285,12 @@ static const CGFloat YTTextViewMinH = 70;
 - (void)convertOriginTextToResultText {
  
     [self.view endEditing:YES];
+    
+    if ([self.destinationBtn.language.code isEqualToString:self.originBtn.language.code]) {
+        [YTAlertView showAlertMsg:@"原始语言与目标语言不能相同"];
+        return;
+    }
+    
     NSDictionary *parameters = @{@"from"    : self.originBtn.language.code,
                                  @"to"      : self.destinationBtn.language.code,
                                  @"query"   : self.originTextView.text};
