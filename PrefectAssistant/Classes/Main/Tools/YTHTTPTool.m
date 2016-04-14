@@ -52,11 +52,43 @@ static MBProgressHUD *_showProgress = nil;
     }];
 }
 
+#pragma mark - 百度API请求
++ (void)bdGet:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
+    [self bdGet:url parameters:parameters autoShowLoading:NO success:success failure:failure];
+}
++ (void)bdGet:(NSString *)url parameters:(id)parameters autoShowLoading:(BOOL)showLoading success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
+    
+    if (_lastNetworkStatus == AFNetworkReachabilityStatusNotReachable) {
+        [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
+        return;
+    }
+    
+    if (showLoading) { [_showProgress show:YES]; }
+    
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
+    [mgr GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (showLoading) { [_showProgress hide:YES]; }
+        
+        if (success) {
+            success(responseObject);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (showLoading) { [_showProgress hide:YES]; }
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
 #pragma mark - GET请求
-+ (void)get:(NSString *)url parameters:(id)parameters success:(void (^)(id))success failure:(void (^)(NSError *))failure {
++ (void)get:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
     [self get:url parameters:parameters autoShowLoading:NO success:success failure:failure];
 }
-+ (void)get:(NSString *)url parameters:(id)parameters autoShowLoading:(BOOL)showLoading success:(void (^)(id))success failure:(void (^)(NSError *))failure {
++ (void)get:(NSString *)url parameters:(id)parameters autoShowLoading:(BOOL)showLoading success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
     
     if (_lastNetworkStatus == AFNetworkReachabilityStatusNotReachable) {
         [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
@@ -84,10 +116,10 @@ static MBProgressHUD *_showProgress = nil;
 }
 
 #pragma mark - POST请求
-+ (void)post:(NSString *)url parameters:(id)parameters success:(void (^)(id))success failure:(void (^)(NSError *))failure {
++ (void)post:(NSString *)url parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
     [self post:url parameters:parameters autoShowLoading:NO success:success failure:failure];
 }
-+ (void)post:(NSString *)url parameters:(id)parameters autoShowLoading:(BOOL)showLoading success:(void (^)(id))success failure:(void (^)(NSError *))failure {
++ (void)post:(NSString *)url parameters:(id)parameters autoShowLoading:(BOOL)showLoading success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
     
     if (_lastNetworkStatus == AFNetworkReachabilityStatusNotReachable) {
         [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
@@ -106,30 +138,6 @@ static MBProgressHUD *_showProgress = nil;
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (showLoading) { [_showProgress hide:YES]; }
-        if (failure) {
-            failure(error);
-        }
-    }];
-}
-
-#pragma mark - 上传（POST方式）
-+ (void)post:(NSString *)url parameters:(id)parameters uploadFiles:(NSArray <YTHTTPFile *> * )files success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
-    [self post:url parameters:parameters uploadFiles:files uploadProgressBlock:nil success:success failure:failure];
-}
-+ (void)post:(NSString *)url parameters:(id)parameters uploadFiles:(NSArray <YTHTTPFile *> *)files uploadProgressBlock:(void (^)(NSUInteger, long long, long long))uploadProgress success:(void (^)(id))success failure:(void (^)(NSError *))failure {
-    
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [files enumerateObjectsUsingBlock:^(YTHTTPFile * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [formData appendPartWithFileData:obj.fileData name:obj.name fileName:obj.fileName mimeType:obj.mimeType];
-        }];
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (success) {
-            success(responseObject);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
             failure(error);
         }

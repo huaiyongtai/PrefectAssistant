@@ -77,21 +77,14 @@
 - (void)driverQuestionFromNetwork {
     
     if (!self.parameters.count) return;
-   
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
-    [mgr GET:@"http://apis.baidu.com/bbtapi/jztk/jztk_query" parameters:self.parameters
-    progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-        NSLog(@"%@", downloadProgress);
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+  
+    [YTHTTPTool bdGet:APIDriverExamQ parameters:self.parameters autoShowLoading:YES success:^(id responseObject) {
         self.problems = [YTProblem mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
         [self.collectionView reloadData];
         NSLog(@"%@", responseObject);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@", error);
+    } failure:^(NSError *error) {
+        YTHTTPFailure(@"数据加载失败")
     }];
-    
 }
 
 #pragma mark - YTProblemCellDelegate

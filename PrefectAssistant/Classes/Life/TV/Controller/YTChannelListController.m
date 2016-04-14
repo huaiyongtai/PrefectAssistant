@@ -33,19 +33,15 @@
 }
 
 - (void)loadTVPlaybillFromNetwork {
-    NSDictionary *parameters = @{@"key" : @"059cb6397da1481fa2221fe60a3c9dfa",
+    NSDictionary *parameters = @{@"key" : APITVKey,
                                  @"pId" : self.categoryId};
     
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr GET:@"http://japi.juhe.cn/tv/getChannel" parameters:parameters  progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [YTHTTPTool get:APITVChannelQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
         self.tvShows = [YTTVShow mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
         [self.tableView reloadData];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
-        NSLog(@"error:%@", error);
     }];
 }
 

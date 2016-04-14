@@ -170,7 +170,5 @@
     YTDriverExamController *examVC = [[YTDriverExamController alloc] init];
     examVC.parameters = dict;
     [self.navigationController pushViewController:examVC animated:YES];
-    NSLog(@"%@", dict);
-    
 }
 @end

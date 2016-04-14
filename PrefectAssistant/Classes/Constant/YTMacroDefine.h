@@ -29,4 +29,9 @@
 #define YTColorGrayText       YTColor(80, 80, 80)
 #define YTColorTintText       YTColor(130, 130, 130)
 
+#define YTHTTPFailure(msg)  [YTAlertView showAlertMsg:(msg)];\
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{\
+                                [self.navigationController popViewControllerAnimated:YES];\
+                            });
+
 #endif /* YTMacroDefine_h */

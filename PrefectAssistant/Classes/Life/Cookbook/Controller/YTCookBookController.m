@@ -72,19 +72,11 @@
     
 }
 - (void)loadCookSortInfoFromNetwork {
-    
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
-
-    [mgr GET:@"http://apis.baidu.com/tngou/cook/classify" parameters:nil  progress:^(NSProgress * _Nonnull downloadProgress) {
-
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+   
+    [YTHTTPTool bdGet:APICookClassifyQ parameters:nil success:^(id responseObject) {
         NSMutableArray *cookKinds = [YTCookKindItem mj_objectArrayWithKeyValuesArray:responseObject[@"tngou"]];
         self.kindView.kindItems = cookKinds;
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@", error);
-    }];
+    } failure:nil];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -96,13 +88,8 @@
     if (!cookName.length) return YES;
     
     NSDictionary *parameters = @{@"name" : cookName};
-    
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
-    [mgr GET:@"http://apis.baidu.com/tngou/cook/name" parameters:parameters  progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+    [YTHTTPTool bdGet:APICookNameQ parameters:parameters success:^(id responseObject) {
+       
         NSMutableArray *dishes = [YTDish mj_objectArrayWithKeyValuesArray:responseObject[@"tngou"]];
         if (dishes.count == 0) {
             [YTAlertView showAlertMsg:[NSString stringWithFormat:@"未找到 %@ 菜品", cookName]];
@@ -113,10 +100,7 @@
             cookListVC.titleName = cookName;
         }
         [self.navigationController pushViewController:cookListVC animated:YES];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@", error);
-    }];
+    } failure:nil];
 
     return YES;
 }

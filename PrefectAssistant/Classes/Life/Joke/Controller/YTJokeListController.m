@@ -117,37 +117,35 @@ typedef NS_ENUM(NSUInteger, YTJokeTypes) {
     NSString *urlString = nil;
     switch (self.jokeType) {
         case YTJokeTypeTextJoke: {
-            urlString = @"http://japi.juhe.cn/joke/content/text.from";
+            urlString = APIJokeTextQ;
             page = [NSString stringWithFormat:@"%zi", (++self.textJokePage)];
             break;
         }
         case YTJokeTypeImgJoke: {
-            urlString = @"http://japi.juhe.cn/joke/img/text.from";
+            urlString = APIJokeImgQ;
             page = [NSString stringWithFormat:@"%zi", (++self.imgJokePage)];
             break;
         }
     }
     
-    NSDictionary *parameters = @{@"key"     : @"3c08a985114fc4c68aed3ca693cc9da1",
+    NSDictionary *parameters = @{@"key"     : APIJokeKey,
                                  @"page"    : page,
                                  @"pagesize": @"20"};
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr GET:urlString parameters:parameters  progress:nil
-     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-         [self.tableView.mj_header endRefreshing];
-         [self.tableView.mj_footer endRefreshing];
+    [YTHTTPTool get:urlString parameters:parameters success:^(id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         
-         NSMutableArray *pageJokes = [YTJoke mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"data"]];
-         if (isRefreshingHeader) {
-             self.jokes = pageJokes;
-         } else {
-             [self.jokes addObjectsFromArray:pageJokes];
-         }
-         [self.tableView reloadData];
-     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-         [self.tableView.mj_header endRefreshing];
-         NSLog(@"error:%@", error);
-     }];
+        NSMutableArray *pageJokes = [YTJoke mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"data"]];
+        if (isRefreshingHeader) {
+            self.jokes = pageJokes;
+        } else {
+            [self.jokes addObjectsFromArray:pageJokes];
+        }
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+    }];
 }
 
 #pragma mark - Table view data source

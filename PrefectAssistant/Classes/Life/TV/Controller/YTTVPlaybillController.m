@@ -33,21 +33,18 @@
 }
 
 - (void)loadTVPlaybillFromNetwork {
-    NSDictionary *parameters = @{@"key" : @"059cb6397da1481fa2221fe60a3c9dfa",
+    NSDictionary *parameters = @{@"key" : APITVKey,
                                  @"code" : self.tvShow.rel};
     
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr GET:@"http://japi.juhe.cn/tv/getProgram" parameters:parameters  progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [self.tableView.mj_header endRefreshing];
-        
+    [YTHTTPTool get:APITVProgramQ parameters:parameters success:^(id responseObject) {
         NSArray *resultArray = responseObject[@"result"];
         if ([resultArray isKindOfClass:[NSArray class]]) {
             self.tvPlaybills = [YTTVPlaybill mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
             [self.tableView reloadData];
         } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"暂无数据,将返回上一级" preferredStyle:UIAlertControllerStyleAlert]; {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示"
+                                                                           message:@"暂无数据,将返回上一级"
+                                                                    preferredStyle:UIAlertControllerStyleAlert]; {
                 
                 [alert addAction:[UIAlertAction actionWithTitle:@"确定"
                                                           style:UIAlertActionStyleDefault
@@ -59,10 +56,8 @@
             };
             [self presentViewController:alert animated:YES completion:nil];
         }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
-        NSLog(@"error:%@", error);
     }];
 }
 

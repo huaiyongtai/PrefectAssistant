@@ -77,7 +77,6 @@
 - (void)loadCookListInfoFromNetworkIsHeaderRefresh:(BOOL)headerRefresh {
     
     static NSInteger page = 1;
-    
     if (headerRefresh) {
         page = 1;
     }
@@ -85,12 +84,7 @@
     NSDictionary *parameters = @{@"id" : self.kindItem.idStr ? : @"0",
                                  @"page" : [NSString stringWithFormat:@"%li", page+1],
                                  @"rows" : @"20"};
-    
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
-    [mgr GET:COOKLIST parameters:parameters  progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [YTHTTPTool bdGet:APICookListQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
@@ -101,10 +95,9 @@
             page++;
         }
         [self.tableView reloadData];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-        NSLog(@"error:%@", error);
     }];
 }
 

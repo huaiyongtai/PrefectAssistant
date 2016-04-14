@@ -23,7 +23,7 @@
     
     self.title = self.keyWord;
     
-    [self.view setBackgroundColor:YTRandomColor];
+    [self.view setBackgroundColor:YTColorBackground];
     
     [self.tableView setTableFooterView:[[UIView alloc] init]];
     
@@ -32,19 +32,13 @@
 
 - (void)loadDreamDataFromNetwork {
     
-    NSDictionary *parameters = @{@"key" : @"50d88e8ad11b50b0ab49d119b61e13b0",
+    NSDictionary *parameters = @{@"key" : APIDreamKey,
                                  @"q"   : self.keyWord,
                                  @"full": @"1"};
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr GET:@"http://v.juhe.cn/dream/query" parameters:parameters  progress:nil
-     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
-         self.dreamRuslts = [YTDream mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
-         [self.tableView reloadData];
-     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-
-         NSLog(@"error:%@", error);
-     }];
+    [YTHTTPTool get:APIDreamQ parameters:parameters autoShowLoading:YES success:^(id responseObject) {
+        self.dreamRuslts = [YTDream mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+        [self.tableView reloadData];
+    } failure:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

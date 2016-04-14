@@ -1,5 +1,6 @@
 
 
+
 //
 //  YTHistoryEventDetailController.m
 //  PrefectAssistant
@@ -26,7 +27,7 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:YTColorBackground];
-    
+
     [self.navigationItem setTitleView:({
         UILabel *titlelabel = [[UILabel alloc] init]; {
             [titlelabel setText:self.historyEvent.title];
@@ -40,14 +41,17 @@
    
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     paramters[@"e_id"] = self.historyEvent.eId;
-    paramters[@"key"] = @"c5770adc04027151413c7b1437cccc8a";
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    paramters[@"key"] = APIHistoryKey;
     
-    [mgr GET:@"http://v.juhe.cn/todayOnhistory/queryDetail.php" parameters:paramters  progress:nil
-     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        self.eventDetail = [YTEventDetail mj_objectWithKeyValues:responseObject[@"result"][0]];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@", error);
+    [YTHTTPTool get:APIHistoryQueryDetailQ parameters:paramters autoShowLoading:YES success:^(id responseObject) {
+        NSArray *enventDtailArray = responseObject[@"result"];
+        if ([enventDtailArray isKindOfClass:[NSArray class]] && enventDtailArray.count) {
+            self.eventDetail = [YTEventDetail mj_objectWithKeyValues:[enventDtailArray firstObject]];
+        } else {
+            [YTAlertView showAlertMsg:@"加载失败"];
+        }
+    } failure:^(NSError *error) {
+        [YTAlertView showAlertMsg:@"数据获取失败"];
     }];
 }
 

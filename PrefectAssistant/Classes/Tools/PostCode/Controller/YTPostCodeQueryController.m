@@ -281,22 +281,20 @@
     self.cityLabel.text = city.name;
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:@"d6ba9692abd2fe847ef40312077fa940" forKey:@"key"];
+    [parameters setValue:APIPostCodeKey forKey:@"key"];
     [parameters setValue:province.idString forKey:@"pid"];
     [parameters setValue:city.idString forKey:@"cid"];
     if (city.districts.count) {
         [parameters setObject:district.idString forKey:@"did"];
     }
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr GET:@"http://v.juhe.cn/postcode/search" parameters:parameters  progress:nil
-     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-         [self.tableView.mj_header endRefreshing];
-         self.postCodes = [YTPostCode mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
-         [self.tableView reloadData];
-     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-         [self.tableView.mj_header endRefreshing];
-         NSLog(@"error:%@", error);
-     }];
+    
+    [YTHTTPTool get:APIPostCodeSearchQ parameters:parameters success:^(id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        self.postCodes = [YTPostCode mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+       [self.tableView.mj_header endRefreshing];
+    }];
 }
 
 

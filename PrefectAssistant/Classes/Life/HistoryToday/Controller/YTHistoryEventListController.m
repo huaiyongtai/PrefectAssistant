@@ -29,6 +29,7 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadEventDateFromNetwork];
     }];
+    self.tableView.tableFooterView = [[UIView alloc] init];
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -36,19 +37,16 @@
     
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     paramters[@"date"] = self.historyDate;
-    paramters[@"key"] = @"c5770adc04027151413c7b1437cccc8a";
+    paramters[@"key"] = APIHistoryKey;
     
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr GET:@"http://v.juhe.cn/todayOnhistory/queryEvent.php" parameters:paramters  progress:nil
-     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-         [self.tableView.mj_header endRefreshing];
-         NSMutableArray *historyEvents = [YTHistoryEvent mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
-         self.historyEvents = historyEvents;
-         [self.tableView reloadData];
-     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-         [self.tableView.mj_header endRefreshing];
-         NSLog(@"error:%@", error);
-     }];
+    [YTHTTPTool get:APIHistoryQueryEventQ parameters:paramters success:^(id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        NSMutableArray *historyEvents = [YTHistoryEvent mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+        self.historyEvents = historyEvents;
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

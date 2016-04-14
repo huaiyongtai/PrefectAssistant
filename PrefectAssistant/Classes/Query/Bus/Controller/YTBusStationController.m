@@ -38,35 +38,31 @@
 - (void)loadBusDataFromNetwork {
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:@"455307040fbad32f14f83169a450db38" forKey:@"key"];
+    [parameters setValue:APIBusKey forKey:@"key"];
     [parameters setValue:self.address forKey:@"city"];
 
     NSString *url = nil;
     switch (self.infoType) {
         case YTBusInfoTypeBusLine: {
             [parameters setValue:self.busInfo forKey:@"bus"];
-            url = @"http://op.juhe.cn/189/bus/busline";
+            url = APIBusLineQ;
             break;
         }
         case YTBusInfoTypeBusStation: {
-            url = @"http://op.juhe.cn/189/bus/station";
+            url = APIBusStationQ;
             [parameters setValue:self.busInfo forKey:@"station"];
             break;
         }
     }
     
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr GET:url parameters:parameters  progress:nil
-     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-         [self.tableView.mj_header endRefreshing];
-         self.busStations = [YTBusStation mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
-         [self.tableView reloadData];
-     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {         
-         [self.tableView.mj_header endRefreshing];
-         NSLog(@"error:%@", error);
-     }];
+    [YTHTTPTool get:url parameters:parameters success:^(id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        self.busStations = [YTBusStation mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+       [self.tableView.mj_header endRefreshing];
+    }];
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.busStations.count;

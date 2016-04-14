@@ -294,14 +294,17 @@ static const CGFloat YTTextViewMinH = 70;
     NSDictionary *parameters = @{@"from"    : self.originBtn.language.code,
                                  @"to"      : self.destinationBtn.language.code,
                                  @"query"   : self.originTextView.text};
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
-    [mgr GET:@"http://apis.baidu.com/apistore/tranlateservice/translate" parameters:parameters
-    progress:^(NSProgress * _Nonnull downloadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [self resultInfoTextString:[responseObject[@"retData"][@"trans_result"] firstObject][@"dst"]];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@", error);
+    
+    [YTHTTPTool bdGet:APITranslateQ parameters:parameters autoShowLoading:YES success:^(id responseObject) {
+        
+        NSArray *reusltArray = responseObject[@"retData"][@"trans_result"];
+        if ([reusltArray isKindOfClass:[NSArray class]] && reusltArray.count) {
+            [self resultInfoTextString:[reusltArray firstObject][@"dst"]];
+        } else {
+            YTHTTPFailure(@"数据加载失败")
+        }
+    } failure:^(NSError *error) {
+        YTHTTPFailure(@"数据加载失败")
     }];
 }
 
