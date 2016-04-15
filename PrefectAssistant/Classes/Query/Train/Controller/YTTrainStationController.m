@@ -41,12 +41,22 @@
    
     [YTHTTPTool bdGet:APITrainStationAllTrainQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
-        NSDictionary *trainsDict = responseObject[@"data"][@"trainInfo"];
-        self.trainInfos = [YTTrainStation mj_objectArrayWithKeyValuesArray:[trainsDict allValues]];
+        
+        NSDictionary *resultDict = responseObject[@"data"][@"trainInfo"];
+        if (![resultDict isKindOfClass:[NSDictionary class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (resultDict.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        self.trainInfos = [YTTrainStation mj_objectArrayWithKeyValuesArray:[resultDict allValues]];
         
         [self.tableView reloadData];
     } failure:^(NSError *error) {
-       [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

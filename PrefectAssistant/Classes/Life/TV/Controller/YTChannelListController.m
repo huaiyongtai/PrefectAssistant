@@ -38,10 +38,20 @@
     
     [YTHTTPTool get:APITVChannelQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
-        self.tvShows = [YTTVShow mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+        NSArray *resultArray = responseObject[@"result"];
+        if (![resultArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        self.tvShows = [YTTVShow mj_objectArrayWithKeyValuesArray:resultArray];
         [self.tableView reloadData];
     } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

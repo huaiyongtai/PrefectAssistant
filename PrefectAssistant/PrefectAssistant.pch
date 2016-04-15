@@ -17,7 +17,6 @@
 #import "YTAlertView.h"
 #import "YTHTTPTool.h"
 
-static NSString *const kBaiduKey = @"CG9FDDZQejS8pGXknrx4j2ah";
 /** 日志信息 */
 #ifdef DEBUG
     #define YTLog(...) NSLog(__VA_ARGS__)

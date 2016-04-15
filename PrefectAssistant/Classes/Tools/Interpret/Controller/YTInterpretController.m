@@ -297,14 +297,18 @@ static const CGFloat YTTextViewMinH = 70;
     
     [YTHTTPTool bdGet:APITranslateQ parameters:parameters autoShowLoading:YES success:^(id responseObject) {
         
-        NSArray *reusltArray = responseObject[@"retData"][@"trans_result"];
-        if ([reusltArray isKindOfClass:[NSArray class]] && reusltArray.count) {
-            [self resultInfoTextString:[reusltArray firstObject][@"dst"]];
-        } else {
-            YTHTTPFailure(@"数据加载失败")
+        NSArray *resultArray = responseObject[@"retData"][@"trans_result"];
+        if (![resultArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
         }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        [self resultInfoTextString:[resultArray firstObject][@"dst"]];
     } failure:^(NSError *error) {
-        YTHTTPFailure(@"数据加载失败")
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

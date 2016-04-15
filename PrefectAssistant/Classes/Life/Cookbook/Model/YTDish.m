@@ -7,7 +7,6 @@
 //
 
 #import "YTDish.h"
-#import <MJExtension/MJExtension.h>
 
 const CGFloat YTDishHeight = 100;
 

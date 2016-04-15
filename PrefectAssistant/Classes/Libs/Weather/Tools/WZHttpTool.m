@@ -8,6 +8,9 @@
 
 #import "WZHttpTool.h"
 #import "WZWeather.h"
+
+static NSString *const kBaiduKey = @"CG9FDDZQejS8pGXknrx4j2ah";
+
 @implementation WZHttpTool
 + (WZHttpTool *)sharedHttpTool{
     static WZHttpTool *httpTool = nil;

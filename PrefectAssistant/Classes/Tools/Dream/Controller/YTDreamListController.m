@@ -36,9 +36,21 @@
                                  @"q"   : self.keyWord,
                                  @"full": @"1"};
     [YTHTTPTool get:APIDreamQ parameters:parameters autoShowLoading:YES success:^(id responseObject) {
-        self.dreamRuslts = [YTDream mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+        
+        NSArray *resultArray = responseObject[@"result"];
+        if (![resultArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        self.dreamRuslts = [YTDream mj_objectArrayWithKeyValuesArray:resultArray];
         [self.tableView reloadData];
-    } failure:nil];
+    } failure:^(NSError *error) {
+        [YTAlertView showAlertMsg:YTHTTPFailure];
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

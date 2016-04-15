@@ -48,12 +48,17 @@
     [YTHTTPTool bdGet:APITrainNumberQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
         
+        if (!(responseObject[@"data"])) {
+            [YTAlertView showAlertMsg:@"服务器异常，请稍后再试"];
+            return;
+        }
         self.trainNumberInfoArray = responseObject[@"data"][@"info"][@"value"];
         self.headerSectionData = responseObject[@"data"][@"info"][@"head"];
         [self setHeaderInfoWithDict:responseObject[@"data"]];
         [self.tableView reloadData];
     } failure:^(NSError *error) {
-       [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

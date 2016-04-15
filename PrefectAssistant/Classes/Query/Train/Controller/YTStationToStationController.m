@@ -78,10 +78,20 @@
    
     [YTHTTPTool bdGet:APITrainStationToStationQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
-        self.trains = [YTTrain mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"trainList"]];
+        NSArray *resultArray = responseObject[@"data"][@"trainList"];
+        if (!([resultArray isKindOfClass:[NSArray class]] && resultArray.count)) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        self.trains = [YTTrain mj_objectArrayWithKeyValuesArray:resultArray];
         [self.tableView reloadData];
     } failure:^(NSError *error) {
-       [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

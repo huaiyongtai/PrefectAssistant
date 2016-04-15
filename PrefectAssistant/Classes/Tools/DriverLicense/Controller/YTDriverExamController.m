@@ -79,10 +79,20 @@
     if (!self.parameters.count) return;
   
     [YTHTTPTool bdGet:APIDriverExamQ parameters:self.parameters autoShowLoading:YES success:^(id responseObject) {
-        self.problems = [YTProblem mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+
+        NSArray *resultArray = responseObject[@"result"];
+        if (![resultArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        self.problems = [YTProblem mj_objectArrayWithKeyValuesArray:resultArray];
         [self.collectionView reloadData];
     } failure:^(NSError *error) {
-        YTHTTPFailure(@"数据加载失败")
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

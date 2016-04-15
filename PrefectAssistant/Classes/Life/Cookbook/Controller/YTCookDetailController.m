@@ -77,17 +77,23 @@ static CGFloat const kHeaderImageViewMaxH = (kHeaderImageViewH+100);
 }
 
 - (void)loadCookDetailFromNetwork {
-    
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
+
     NSDictionary *parameters = @{@"id" : self.dish.idStr};
-    [mgr GET:@"http://apis.baidu.com/tngou/cook/show" parameters:parameters  progress:^(NSProgress * _Nonnull downloadProgress) {
+    [YTHTTPTool bdGet:APICookShowQ parameters:parameters success:^(id responseObject) {
+        NSDictionary *responseObj = responseObject;
+        if (![responseObj isKindOfClass:[NSDictionary class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (responseObj.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
         
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         YTCookDetail *cookDetail = [YTCookDetail mj_objectWithKeyValues:responseObject];
         [self reloadDataWithCookDetail:cookDetail];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error:%@", error);
+    } failure:^(NSError *error) {
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

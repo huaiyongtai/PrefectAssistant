@@ -44,14 +44,18 @@
     paramters[@"key"] = APIHistoryKey;
     
     [YTHTTPTool get:APIHistoryQueryDetailQ parameters:paramters autoShowLoading:YES success:^(id responseObject) {
-        NSArray *enventDtailArray = responseObject[@"result"];
-        if ([enventDtailArray isKindOfClass:[NSArray class]] && enventDtailArray.count) {
-            self.eventDetail = [YTEventDetail mj_objectWithKeyValues:[enventDtailArray firstObject]];
-        } else {
-            [YTAlertView showAlertMsg:@"加载失败"];
+        NSArray *resultArray = responseObject[@"result"];
+        if (![resultArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
         }
+        if (resultArray.count==0 || ![resultArray firstObject]) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        self.eventDetail = [YTEventDetail mj_objectWithKeyValues:[resultArray firstObject]];
     } failure:^(NSError *error) {
-        [YTAlertView showAlertMsg:@"数据获取失败"];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

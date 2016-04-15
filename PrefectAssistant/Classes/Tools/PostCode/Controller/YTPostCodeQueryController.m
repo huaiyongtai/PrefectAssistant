@@ -79,7 +79,7 @@
         CGFloat lineY = 10.0f;
         CALayer *leftLineLayer = [[CALayer alloc] init]; {
             [leftLineLayer setFrame:CGRectMake(provinceLabel.rightX, lineY, 1, height-2*lineY)];
-            [leftLineLayer setBackgroundColor:YTRandomColor.CGColor];
+            [leftLineLayer setBackgroundColor:YTColorLineSeparate];
         }
         [addressView.layer addSublayer:leftLineLayer];
         
@@ -94,7 +94,7 @@
         
         CALayer *rightLineLayer = [[CALayer alloc] init]; {
             [rightLineLayer setFrame:CGRectMake(cityLabel.rightX, lineY, 1, height-2*lineY)];
-            [rightLineLayer setBackgroundColor:YTRandomColor.CGColor];
+            [rightLineLayer setBackgroundColor:YTColorLineSeparate];
         }
         [addressView.layer addSublayer:rightLineLayer];
         
@@ -290,10 +290,20 @@
     
     [YTHTTPTool get:APIPostCodeSearchQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
-        self.postCodes = [YTPostCode mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"list"]];
+        NSMutableArray *listArray = responseObject[@"result"][@"list"];
+        if (![listArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (listArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        self.postCodes = [YTPostCode mj_objectArrayWithKeyValuesArray:listArray];
         [self.tableView reloadData];
     } failure:^(NSError *error) {
-       [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

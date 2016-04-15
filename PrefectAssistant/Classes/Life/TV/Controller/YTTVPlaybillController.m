@@ -38,27 +38,20 @@
     
     [YTHTTPTool get:APITVProgramQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
+        
         NSArray *resultArray = responseObject[@"result"];
-        if ([resultArray isKindOfClass:[NSArray class]]) {
-            self.tvPlaybills = [YTTVPlaybill mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
-            [self.tableView reloadData];
-        } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示"
-                                                                           message:@"暂无数据,将返回上一级"
-                                                                    preferredStyle:UIAlertControllerStyleAlert]; {
-                
-                [alert addAction:[UIAlertAction actionWithTitle:@"确定"
-                                                          style:UIAlertActionStyleDefault
-                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                            [self.navigationController popViewControllerAnimated:YES];
-                                                        }
-                                  ]
-                 ];
-            };
-            [self presentViewController:alert animated:YES completion:nil];
+        if (!([resultArray isKindOfClass:[NSArray class]] && resultArray.count)) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
         }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        self.tvPlaybills = [YTTVPlaybill mj_objectArrayWithKeyValuesArray:resultArray];
     } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

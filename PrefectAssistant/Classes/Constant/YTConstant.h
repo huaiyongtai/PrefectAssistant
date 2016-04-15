@@ -10,15 +10,17 @@
 
 #pragma mark - 常量
 extern const float HLineSeparate;   //分割线
-extern const float HNav;       //导航高度
-extern const float HMargin;    //标准间距
+extern const float HNav;            //导航高度
+extern const float HMargin;         //标准间距
+
+//网络请求提示
+extern NSString * const YTHTTPDataZero;         //数据请求成功、返回数据为空
+extern NSString * const YTHTTPDataException;    //数据请求成功、返回数据异常
+extern NSString * const YTHTTPFailure;          //请求失败
 
 #pragma mark - 百度
-//http://apistore.baidu.com/astore/classificationservicelist.html
 
-extern NSString * const APIKEY;
-
-extern NSString * const COOKLIST;
+extern NSString * const APIBaiduKey;
 
 //列车时刻表查询
 extern NSString * const APITrainNumberQ;
@@ -33,6 +35,8 @@ extern NSString * const APICookClassifyQ;
 extern NSString * const APICookNameQ;
 //菜谱-列表
 extern NSString * const APICookListQ;
+//菜谱-详细
+extern NSString * const APICookShowQ;
 
 //翻译
 extern NSString * const APITranslateQ;
@@ -79,18 +83,3 @@ extern NSString * const APIBusKey;
 extern NSString * const APIBusLineQ;
 //Bus-BusStation
 extern NSString * const APIBusStationQ;
-
-#pragma mark - 易源
-//https://www.showapi.com/api/apiList
-
-extern NSString * const APPID;
-extern NSString * const APPSECRET;
-
-//火车票价格信息查询
-extern NSString * const APITrainPriceQ;
-
-//列车时刻表查询
-extern NSString * const APITrainTimeQDEPRECATED;    //deprecated; 时间不准确
-
-//火车余票信息查询
-extern NSString * const APITrainRemainTicketQ;

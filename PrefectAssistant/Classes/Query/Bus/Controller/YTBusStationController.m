@@ -57,10 +57,21 @@
     
     [YTHTTPTool get:url parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
-        self.busStations = [YTBusStation mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+        NSArray *resultArray = responseObject[@"result"];
+        if (![resultArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        
+        self.busStations = [YTBusStation mj_objectArrayWithKeyValuesArray:resultArray];
         [self.tableView reloadData];
     } failure:^(NSError *error) {
-       [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

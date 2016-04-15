@@ -49,7 +49,6 @@
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(leftNavDidClick)];
-    
     [self setupViews];
 }
 
@@ -59,9 +58,8 @@
     
     UIScrollView *containView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     
-    YTRoundView *roundView = [YTRoundView roundViewWitAdImageInfos:@[@"adImage0", @"adImage1", @"adImage2", @"adImage3"]
+    YTRoundView *roundView = [YTRoundView roundViewWitAdImageInfos:@[@"adImage2", @"adImage1", @"adImage3", @"adImage0"]
                                                           adTitles:nil didSelected:^(NSInteger index, id adInfo) {
-                                                              NSLog(@"您选择了第 %li 张图片", index);
                                                           }];
     [roundView setShowPageIndicator:YES];
     [roundView setFrame:CGRectMake(0, HNav, YTSCREEN_W, 180)];
@@ -121,7 +119,6 @@
                                                                                                     animated:YES];
                                                                break;
                                                        }
-                                                       NSLog(@"点击了第 %li 个 名字为：%@ 的按钮", (long)index, title);
                                                    }];
     [queryView setFrame:CGRectMake(0, lifeView.bottomY, YTSCREEN_W, 100)];
     [containView addSubview:queryView];

@@ -134,8 +134,17 @@ typedef NS_ENUM(NSUInteger, YTJokeTypes) {
     [YTHTTPTool get:urlString parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-        
-        NSMutableArray *pageJokes = [YTJoke mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"data"]];
+       
+        NSMutableArray *dateArray = responseObject[@"result"][@"data"];
+        if (![dateArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (dateArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        NSMutableArray *pageJokes = [YTJoke mj_objectArrayWithKeyValuesArray:dateArray];
         if (isRefreshingHeader) {
             self.jokes = pageJokes;
         } else {
@@ -145,6 +154,7 @@ typedef NS_ENUM(NSUInteger, YTJokeTypes) {
     } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

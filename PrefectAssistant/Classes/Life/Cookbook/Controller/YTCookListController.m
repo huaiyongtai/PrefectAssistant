@@ -82,22 +82,32 @@
     }
     
     NSDictionary *parameters = @{@"id" : self.kindItem.idStr ? : @"0",
-                                 @"page" : [NSString stringWithFormat:@"%li", page+1],
+                                 @"page" : [NSString stringWithFormat:@"%zi", page+1],
                                  @"rows" : @"20"};
     [YTHTTPTool bdGet:APICookListQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-        
+       
+        NSArray *resultArray = responseObject[@"tngou"];
+        if (![resultArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
         if (headerRefresh) {
-            self.dishes = [YTDish mj_objectArrayWithKeyValuesArray:responseObject[@"tngou"]];
+            self.dishes = [YTDish mj_objectArrayWithKeyValuesArray:resultArray];
         } else {
-            [self.dishes addObjectsFromArray:[YTDish mj_objectArrayWithKeyValuesArray:responseObject[@"tngou"]]];
+            [self.dishes addObjectsFromArray:[YTDish mj_objectArrayWithKeyValuesArray:resultArray]];
             page++;
         }
         [self.tableView reloadData];
     } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
+        [YTAlertView showAlertMsg:YTHTTPFailure];
     }];
 }
 

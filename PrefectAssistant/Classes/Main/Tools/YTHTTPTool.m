@@ -11,7 +11,7 @@
 #import "MBProgressHUD.h"
 #import "YTAlertView.h"
 
-static AFNetworkReachabilityStatus _lastNetworkStatus = -11;
+static AFNetworkReachabilityStatus _lastNetworkStatus = AFNetworkReachabilityStatusUnknown;
 
 @implementation YTHTTPTool
 
@@ -21,22 +21,6 @@ static AFNetworkReachabilityStatus _lastNetworkStatus = -11;
     AFNetworkReachabilityManager *networkMgr = [AFNetworkReachabilityManager sharedManager];
     [networkMgr startMonitoring];
     [networkMgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        
-        switch (status) {
-            case AFNetworkReachabilityStatusUnknown:
-            case AFNetworkReachabilityStatusNotReachable: {
-                [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
-                break;
-            }
-            case AFNetworkReachabilityStatusReachableViaWWAN: {
-                [YTAlertView showAlertMsg:@"以切花至蜂窝网络"];
-                break;
-            }
-            case AFNetworkReachabilityStatusReachableViaWiFi: {
-                [YTAlertView showAlertMsg:@"以切花至WiFI网络"];
-                break;
-            }
-        }
         _lastNetworkStatus = status;
     }];
 }
@@ -48,7 +32,7 @@ static AFNetworkReachabilityStatus _lastNetworkStatus = -11;
 + (void)bdGet:(NSString *)url parameters:(id)parameters autoShowLoading:(BOOL)showLoading success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
     
     if (_lastNetworkStatus == AFNetworkReachabilityStatusNotReachable) {
-        [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
+        [YTAlertView showAlertMsg:@"抱歉您似乎已经和网络已断开连接"];
         return;
     }
    
@@ -56,7 +40,7 @@ static AFNetworkReachabilityStatus _lastNetworkStatus = -11;
     if (showLoading) { [MBProgressHUD showHUDAddedTo:topView animated:YES]; }
     
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
+    [mgr.requestSerializer setValue:APIBaiduKey forHTTPHeaderField:@"apikey"];
     [mgr GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -65,7 +49,6 @@ static AFNetworkReachabilityStatus _lastNetworkStatus = -11;
         if (success) {
             success(responseObject);
         }
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (showLoading) { [MBProgressHUD hideHUDForView:topView animated:YES]; }
         if (failure) {
@@ -81,7 +64,7 @@ static AFNetworkReachabilityStatus _lastNetworkStatus = -11;
 + (void)get:(NSString *)url parameters:(id)parameters autoShowLoading:(BOOL)showLoading success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
     
     if (_lastNetworkStatus == AFNetworkReachabilityStatusNotReachable) {
-        [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
+        [YTAlertView showAlertMsg:@"抱歉您似乎已经和网络已断开连接"];
         return;
     }
    
@@ -97,7 +80,6 @@ static AFNetworkReachabilityStatus _lastNetworkStatus = -11;
         if (success) {
             success(responseObject);
         }
-
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (showLoading) { [MBProgressHUD hideHUDForView:topView animated:YES]; }
         if (failure) {
@@ -113,7 +95,7 @@ static AFNetworkReachabilityStatus _lastNetworkStatus = -11;
 + (void)post:(NSString *)url parameters:(id)parameters autoShowLoading:(BOOL)showLoading success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure {
     
     if (_lastNetworkStatus == AFNetworkReachabilityStatusNotReachable) {
-        [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
+        [YTAlertView showAlertMsg:@"抱歉您似乎已经和网络已断开连接"];
         return;
     }
     

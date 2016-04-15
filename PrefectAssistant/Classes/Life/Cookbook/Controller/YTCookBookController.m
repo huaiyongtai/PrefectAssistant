@@ -74,7 +74,16 @@
 - (void)loadCookSortInfoFromNetwork {
    
     [YTHTTPTool bdGet:APICookClassifyQ parameters:nil success:^(id responseObject) {
-        NSMutableArray *cookKinds = [YTCookKindItem mj_objectArrayWithKeyValuesArray:responseObject[@"tngou"]];
+        NSArray *resultArray = responseObject[@"tngou"];
+        if (![resultArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
+            return;
+        }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        NSMutableArray *cookKinds = [YTCookKindItem mj_objectArrayWithKeyValuesArray:resultArray];
         self.kindView.kindItems = cookKinds;
     } failure:nil];
 }
@@ -88,13 +97,18 @@
     if (!cookName.length) return YES;
     
     NSDictionary *parameters = @{@"name" : cookName};
-    [YTHTTPTool bdGet:APICookNameQ parameters:parameters success:^(id responseObject) {
-       
-        NSMutableArray *dishes = [YTDish mj_objectArrayWithKeyValuesArray:responseObject[@"tngou"]];
-        if (dishes.count == 0) {
-            [YTAlertView showAlertMsg:[NSString stringWithFormat:@"未找到 %@ 菜品", cookName]];
+    [YTHTTPTool bdGet:APICookNameQ parameters:parameters autoShowLoading:YES success:^(id responseObject) {
+      
+        NSArray *resultArray = responseObject[@"tngou"];
+        if (![resultArray isKindOfClass:[NSArray class]]) {
+            [YTAlertView showAlertMsg:YTHTTPDataException];
             return;
         }
+        if (resultArray.count == 0) {
+            [YTAlertView showAlertMsg:YTHTTPDataZero];
+            return;
+        }
+        NSMutableArray *dishes = [YTDish mj_objectArrayWithKeyValuesArray:resultArray];
         textField.text = nil;
         YTCookListController *cookListVC = [YTCookListController cookListVCWithDishes:dishes]; {
             cookListVC.titleName = cookName;
