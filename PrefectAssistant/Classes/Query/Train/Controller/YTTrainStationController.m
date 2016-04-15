@@ -38,18 +38,15 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:@"1.0" forKey:@"version"];
     [parameters setObject:self.trainQuery.stationName forKey:@"station"];
-    
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
-    [mgr GET:APITrainStationAllTrainQ parameters:parameters  progress:^(NSProgress * _Nonnull downloadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+   
+    [YTHTTPTool bdGet:APITrainStationAllTrainQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
         NSDictionary *trainsDict = responseObject[@"data"][@"trainInfo"];
         self.trainInfos = [YTTrainStation mj_objectArrayWithKeyValuesArray:[trainsDict allValues]];
         
         [self.tableView reloadData];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.tableView.mj_header endRefreshing];
+    } failure:^(NSError *error) {
+       [self.tableView.mj_header endRefreshing];
     }];
 }
 

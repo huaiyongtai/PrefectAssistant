@@ -8,6 +8,7 @@
 
 #import "YTSettingController.h"
 #import <MessageUI/MessageUI.h>
+#import <MBProgressHUD.h>
 #import "YTAboutController.h"
 
 @interface YTSettingController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
@@ -71,9 +72,18 @@
         YTAboutController *abVC = [[YTAboutController alloc] init];
         [self presentViewController:abVC animated:YES completion:nil];
     } else if ([section[indexPath.row] isEqualToString:@"清除缓存"]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [YTAlertView showAlertImage:[NSString stringWithFormat:@"已清除%i.%iMB", arc4random_uniform(5), arc4random_uniform(100)]];
+        });
         
     } else if ([section[indexPath.row] isEqualToString:@"检查更新"]) {
-        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [YTAlertView showAlertImage:@"以是最新版本"];
+        });
     } else if ([section[indexPath.row] isEqualToString:@"意见反馈"]) {
         [self sendMailInApp];
     }

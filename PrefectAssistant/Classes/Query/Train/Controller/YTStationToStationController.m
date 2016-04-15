@@ -75,17 +75,13 @@
     [parameters setObject:self.trainQuery.startStation forKey:@"from"];
     [parameters setObject:self.trainQuery.endStation forKey:@"to"];
     [parameters setObject:self.trainQuery.departedTime forKey:@"date"];
-    
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
-    [mgr GET:APITrainStationToStationQ parameters:parameters  progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+   
+    [YTHTTPTool bdGet:APITrainStationToStationQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
         self.trains = [YTTrain mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"trainList"]];
         [self.tableView reloadData];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.tableView.mj_header endRefreshing];
+    } failure:^(NSError *error) {
+       [self.tableView.mj_header endRefreshing];
     }];
 }
 

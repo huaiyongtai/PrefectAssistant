@@ -16,6 +16,7 @@
 #import "WZTitleTableViewCell.h"
 #import "WZForecastTableViewCell.h"
 #import "WZIndexTableViewCell.h"
+#import <MBProgressHUD.h>
 @interface WZWeatherViewController ()
 @property(nonatomic,strong) WZWeather *weather;
 @property(nonatomic,strong) WZResults *result;
@@ -215,9 +216,11 @@
     [self requestWithCityInfo:cityInfo];
 }
 
-
 -(void)requestWithCityInfo:(NSString *)cityInfo{
+
+    [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].windows lastObject] animated:YES];
     [kWZHttpTool weatherRequestWithCityInfo:cityInfo success:^(WZWeather *weather) {
+        [MBProgressHUD  hideHUDForView:[[UIApplication sharedApplication].windows lastObject] animated:YES];
         if (! self.cityName ) {
              [WZFileTool writeWeatherToFile:weather withCity:nil];
         }else{
@@ -228,7 +231,9 @@
         self.weatherData = self.result.weather_data;
         self.weather = weather;
         [self loadViews];
-    } failure:nil];
+    } failure:^(id error) {
+        [MBProgressHUD  hideHUDForView:[[UIApplication sharedApplication].windows lastObject] animated:YES];
+    }];
 
 }
 

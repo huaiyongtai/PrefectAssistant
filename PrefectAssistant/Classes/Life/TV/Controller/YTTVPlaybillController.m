@@ -37,6 +37,7 @@
                                  @"code" : self.tvShow.rel};
     
     [YTHTTPTool get:APITVProgramQ parameters:parameters success:^(id responseObject) {
+        [self.tableView.mj_header endRefreshing];
         NSArray *resultArray = responseObject[@"result"];
         if ([resultArray isKindOfClass:[NSArray class]]) {
             self.tvPlaybills = [YTTVPlaybill mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];

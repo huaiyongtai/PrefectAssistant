@@ -11,44 +11,33 @@
 #import "MBProgressHUD.h"
 #import "YTAlertView.h"
 
-static AFNetworkReachabilityStatus _lastNetworkStatus = AFNetworkReachabilityStatusReachableViaWiFi;
-static MBProgressHUD *_showProgress = nil;
+static AFNetworkReachabilityStatus _lastNetworkStatus = -11;
 
 @implementation YTHTTPTool
 
 + (void)initialize {
     
-    //1.加载指示器
-    _showProgress = [[MBProgressHUD alloc] init]; {
-        _showProgress.labelText = @"努力加载中...";
-        _showProgress.color = [UIColor colorWithRed:0.23 green:0.50 blue:0.82 alpha:0.90];
-        _showProgress.removeFromSuperViewOnHide = YES;
-    }
-    
-    //2.加载网络监听器
+    //1.加载网络监听器
     AFNetworkReachabilityManager *networkMgr = [AFNetworkReachabilityManager sharedManager];
     [networkMgr startMonitoring];
     [networkMgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        _lastNetworkStatus = status;
+        
         switch (status) {
             case AFNetworkReachabilityStatusUnknown:
             case AFNetworkReachabilityStatusNotReachable: {
-                _lastNetworkStatus = AFNetworkReachabilityStatusNotReachable;
                 [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
                 break;
             }
             case AFNetworkReachabilityStatusReachableViaWWAN: {
-                _lastNetworkStatus = AFNetworkReachabilityStatusReachableViaWWAN;
-                [YTAlertView showAlertMsg:@"网络以切花至蜂窝网络"];
+                [YTAlertView showAlertMsg:@"以切花至蜂窝网络"];
                 break;
             }
             case AFNetworkReachabilityStatusReachableViaWiFi: {
-                _lastNetworkStatus = AFNetworkReachabilityStatusReachableViaWiFi;
-                [YTAlertView showAlertMsg:@"网络以切花至WiFI"];
+                [YTAlertView showAlertMsg:@"以切花至WiFI网络"];
                 break;
             }
         }
-        NSLog(@"setReachabilityStatusChangeBlock");
+        _lastNetworkStatus = status;
     }];
 }
 
@@ -62,22 +51,23 @@ static MBProgressHUD *_showProgress = nil;
         [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
         return;
     }
-    
-    if (showLoading) { [_showProgress show:YES]; }
+   
+    UIView *topView = [[UIApplication sharedApplication].windows lastObject];
+    if (showLoading) { [MBProgressHUD showHUDAddedTo:topView animated:YES]; }
     
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
     [mgr GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (showLoading) { [_showProgress hide:YES]; }
+        if (showLoading) { [MBProgressHUD hideHUDForView:topView animated:YES]; }
         
         if (success) {
             success(responseObject);
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (showLoading) { [_showProgress hide:YES]; }
+        if (showLoading) { [MBProgressHUD hideHUDForView:topView animated:YES]; }
         if (failure) {
             failure(error);
         }
@@ -94,21 +84,22 @@ static MBProgressHUD *_showProgress = nil;
         [YTAlertView showAlertMsg:@"抱歉您似乎和网络已断开连接"];
         return;
     }
-    
-    if (showLoading) { [_showProgress show:YES]; }
+   
+    UIView *topView = [[UIApplication sharedApplication].windows lastObject];
+    if (showLoading) { [MBProgressHUD showHUDAddedTo:topView animated:YES]; }
     
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     [mgr GET:url parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (showLoading) { [_showProgress hide:YES]; }
+        if (showLoading) { [MBProgressHUD hideHUDForView:topView animated:YES]; }
         
         if (success) {
             success(responseObject);
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (showLoading) { [_showProgress hide:YES]; }
+        if (showLoading) { [MBProgressHUD hideHUDForView:topView animated:YES]; }
         if (failure) {
             failure(error);
         }
@@ -126,18 +117,19 @@ static MBProgressHUD *_showProgress = nil;
         return;
     }
     
-    if (showLoading) { [_showProgress show:YES]; }
+    UIView *topView = [[UIApplication sharedApplication].windows lastObject];
+    if (showLoading) { [MBProgressHUD showHUDAddedTo:topView animated:YES]; }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     [mgr POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (showLoading) { [_showProgress hide:YES]; }
+        if (showLoading) { [MBProgressHUD hideHUDForView:topView animated:YES]; }
         
         if (success) {
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (showLoading) { [_showProgress hide:YES]; }
+        if (showLoading) { [MBProgressHUD hideHUDForView:topView animated:YES]; }
         if (failure) {
             failure(error);
         }

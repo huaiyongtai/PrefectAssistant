@@ -36,6 +36,8 @@ const CGFloat YTTrainSeatCellH = 30;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self == nil) return nil;
     
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     CGFloat margin = 30;
     CGFloat width = (YTSCREEN_W - 2*margin) / 3;
     CGFloat height = YTTrainSeatCellH;

@@ -81,7 +81,6 @@
     [YTHTTPTool bdGet:APIDriverExamQ parameters:self.parameters autoShowLoading:YES success:^(id responseObject) {
         self.problems = [YTProblem mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
         [self.collectionView reloadData];
-        NSLog(@"%@", responseObject);
     } failure:^(NSError *error) {
         YTHTTPFailure(@"数据加载失败")
     }];

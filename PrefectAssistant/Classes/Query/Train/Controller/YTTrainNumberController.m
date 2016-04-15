@@ -44,18 +44,16 @@
     [parameters setObject:@"1.0" forKey:@"version"];
     [parameters setObject:self.trainQuery.trainNo forKey:@"train"];
     [parameters setObject:self.trainQuery.departedTime forKey:@"date"];
-    
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr.requestSerializer setValue:APIKEY forHTTPHeaderField:@"apikey"];
-    [mgr GET:APITrainNumberQ parameters:parameters  progress:^(NSProgress * _Nonnull downloadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+   
+    [YTHTTPTool bdGet:APITrainNumberQ parameters:parameters success:^(id responseObject) {
         [self.tableView.mj_header endRefreshing];
+        
         self.trainNumberInfoArray = responseObject[@"data"][@"info"][@"value"];
         self.headerSectionData = responseObject[@"data"][@"info"][@"head"];
         [self setHeaderInfoWithDict:responseObject[@"data"]];
         [self.tableView reloadData];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.tableView.mj_header endRefreshing];
+    } failure:^(NSError *error) {
+       [self.tableView.mj_header endRefreshing];
     }];
 }
 
