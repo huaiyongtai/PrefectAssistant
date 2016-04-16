@@ -49,6 +49,7 @@
             return;
         }
         self.tvPlaybills = [YTTVPlaybill mj_objectArrayWithKeyValuesArray:resultArray];
+        [self.tableView reloadData];
     } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
         [YTAlertView showAlertMsg:YTHTTPFailure];
