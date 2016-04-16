@@ -66,7 +66,7 @@
     [containView addSubview:roundView];
     
     YTModuleView *lifeView = [YTModuleView moduleVieWithCatalogTitle:@"生活"
-                                                          itemTitles:@[@"菜谱", @"电视", @"笑话", @"历时"]
+                                                          itemTitles:@[@"菜谱", @"电视", @"笑话", @"历史"]
                                                           themeColor:YTColor(251, 84, 66)
                                                 catalogSelectedBlock:^(NSString *title) {
                                                     [self.navigationController pushViewController:[[YTCookBookController alloc] init]
