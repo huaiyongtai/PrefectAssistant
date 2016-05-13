@@ -11,6 +11,7 @@
 #import <UIImageView+WebCache.h>
 #import "YTDish.h"
 #import "YTCookDetail.h"
+#import "UINavigationBar+Extension.h"
 
 //顶部ImageView的初始高度
 static CGFloat const kHeaderImageViewH = 150;
@@ -39,6 +40,9 @@ static CGFloat const kHeaderImageViewMaxH = (kHeaderImageViewH+100);
     
     self.title = self.dish.name;
     
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    [self.navigationController.navigationBar setCurrentBarBackgroundColor:[UIColor clearColor]];
+    
     [self setupUIConfig];
     
     [self loadCookDetailFromNetwork];
@@ -46,12 +50,11 @@ static CGFloat const kHeaderImageViewMaxH = (kHeaderImageViewH+100);
 
 - (void)setupUIConfig {
     
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     UIImageView *dishImageView = [[UIImageView alloc] init]; {
         [dishImageView setContentMode:UIViewContentModeScaleAspectFill];
-        [dishImageView setFrame:CGRectMake(0, 64, YTSCREEN_W, kHeaderImageViewH)];
+        [dishImageView setFrame:CGRectMake(0, 0, YTSCREEN_W, kHeaderImageViewH)];
     }
     [self.view addSubview:dishImageView];
     self.dishImageView = dishImageView;

@@ -9,9 +9,10 @@
 #import "YTHomePageController.h"
 #import "YTRoundView.h"
 #import "YTModuleView.h"
-#import "YTSettingController.h"
-#import "WZWeatherViewController.h"
+#import "UINavigationBar+Extension.h"
 
+#import "WZWeatherViewController.h"     //天气
+#import "YTSettingController.h"         //设置
 
 #import "YTCookBookController.h"        //菜谱
 #import "YTTVCategoryController.h"      //电视
@@ -27,7 +28,7 @@
 #import "YTExpressageController.h"      //快递
 #import "YTTrainInfoQueryController.h"  //火车
 
-@interface YTHomePageController ()
+@interface YTHomePageController () <UIScrollViewDelegate>
 
 @end
 
@@ -35,7 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+    
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    
     [self.view setBackgroundColor:YTColorBackground];
     
     self.title = @"百分助理";
@@ -49,6 +52,10 @@
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(leftNavDidClick)];
+   
+    [self.navigationController.navigationBar setBarBackgroundColor:YTColor(26, 167, 242)];
+    [self.navigationController.navigationBar setCurrentBarBackgroundColor:[UIColor clearColor]];
+    
     [self setupViews];
 }
 
@@ -57,12 +64,14 @@
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     UIScrollView *containView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    [containView setDelegate:self];
+
     
     YTRoundView *roundView = [YTRoundView roundViewWitAdImageInfos:@[@"adImage2", @"adImage1", @"adImage3", @"adImage0"]
                                                           adTitles:nil didSelected:^(NSInteger index, id adInfo) {
                                                           }];
     [roundView setShowPageIndicator:YES];
-    [roundView setFrame:CGRectMake(0, HNav, YTSCREEN_W, 180)];
+    [roundView setFrame:CGRectMake(0, 0, YTSCREEN_W, 180)];
     [containView addSubview:roundView];
     
     YTModuleView *lifeView = [YTModuleView moduleVieWithCatalogTitle:@"生活"
@@ -91,7 +100,7 @@
                                                             break;
                                                     }
                                                 }];
-    [lifeView setFrame:CGRectMake(0, roundView.bottomY, YTSCREEN_W, 100)];
+    [lifeView setFrame:CGRectMake(0, roundView.bottomY, YTSCREEN_W, 120)];
     [containView addSubview:lifeView];
     
     YTModuleView *queryView = [YTModuleView moduleVieWithCatalogTitle:@"工具"
@@ -120,7 +129,7 @@
                                                                break;
                                                        }
                                                    }];
-    [queryView setFrame:CGRectMake(0, lifeView.bottomY, YTSCREEN_W, 100)];
+    [queryView setFrame:CGRectMake(0, lifeView.bottomY, YTSCREEN_W, 120)];
     [containView addSubview:queryView];
     
     YTModuleView *moduleView2 = [YTModuleView moduleVieWithCatalogTitle:@"查询"
@@ -148,11 +157,16 @@
                                                                break;
                                                        }
                                                    }];
-    [moduleView2 setFrame:CGRectMake(0, queryView.bottomY, YTSCREEN_W, 100)];
+    [moduleView2 setFrame:CGRectMake(0, queryView.bottomY, YTSCREEN_W, 120)];
     [containView addSubview:moduleView2];
     
     [containView setContentSize:CGSizeMake(0, moduleView2.bottomY)];
     [self.view addSubview:containView];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
 }
 
 #pragma mark - Nav

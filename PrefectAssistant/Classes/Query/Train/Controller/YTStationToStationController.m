@@ -31,7 +31,7 @@
     [self.navigationItem setTitleView:({
         UIButton *navTitile = [UIButton buttonWithType:UIButtonTypeCustom]; {
             [navTitile setTitle:({
-                [self.trainQuery.startStation stringByAppendingFormat:@" <—> %@", self.trainQuery.endStation];
+                [self.trainQuery.startStation stringByAppendingFormat:@"<—>%@", self.trainQuery.endStation];
             }) forState:UIControlStateNormal];
             [navTitile setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [navTitile setFrame:CGRectMake(0, 0, 50, 35)];

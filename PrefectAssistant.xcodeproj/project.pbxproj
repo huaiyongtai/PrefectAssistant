@@ -17,14 +17,13 @@
 		82239EF91CA27FD900859C77 /* YTCookKindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82239EF81CA27FD900859C77 /* YTCookKindView.m */; };
 		82239EFC1CA27FF100859C77 /* YTCookKindItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82239EFB1CA27FF100859C77 /* YTCookKindItemView.m */; };
 		82239EFF1CA2A5C100859C77 /* YTDishCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82239EFE1CA2A5C100859C77 /* YTDishCell.m */; };
+		822AE6801CE5F43400A2AEC3 /* UINavigationBar+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 822AE67F1CE5F43400A2AEC3 /* UINavigationBar+Extension.m */; };
 		822B69841CB500E800927444 /* YTJoke.m in Sources */ = {isa = PBXBuildFile; fileRef = 822B69831CB500E800927444 /* YTJoke.m */; };
 		822B69871CB5018B00927444 /* YTJokeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 822B69861CB5018B00927444 /* YTJokeListController.m */; };
 		822B698A1CB5081F00927444 /* YTJokeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 822B69891CB5081F00927444 /* YTJokeCell.m */; };
-		822B698D1CB50EF100927444 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 822B698C1CB50EF100927444 /* NSString+Extension.m */; };
 		822B69931CB640B700927444 /* YTHistoryEventDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 822B69921CB640B700927444 /* YTHistoryEventDetailController.m */; };
 		822B69961CB6415A00927444 /* YTEventDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 822B69951CB6415A00927444 /* YTEventDetail.m */; };
 		822B699F1CB7972900927444 /* Province.plist in Resources */ = {isa = PBXBuildFile; fileRef = 822B699E1CB7972900927444 /* Province.plist */; };
-		823E85791C9F9F8B00A3BCA0 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 823E85781C9F9F8B00A3BCA0 /* UIView+Extension.m */; };
 		824E05B91CA99C8100C8BA4D /* YTTrainInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E05B81CA99C8100C8BA4D /* YTTrainInfoQuery.m */; };
 		824E05BC1CA9A35F00C8BA4D /* YTTrainQueryItemBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 824E05BB1CA9A35F00C8BA4D /* YTTrainQueryItemBtn.m */; };
 		82557DD21CBE1D7F003408FE /* address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82557DD11CBE1D7F003408FE /* address.plist */; };
@@ -83,6 +82,8 @@
 		829E293E1CA41BEE00ADFB78 /* YTTrainInfoQueryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 829E293D1CA41BEE00ADFB78 /* YTTrainInfoQueryController.m */; };
 		829E29441CA421A300ADFB78 /* YTMenuContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 829E29431CA421A300ADFB78 /* YTMenuContentView.m */; };
 		82BAF8081CABC91600124A8C /* YTExpressageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BAF8071CABC91600124A8C /* YTExpressageController.m */; };
+		82C83BCE1CE20456003F832D /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C83BCB1CE20456003F832D /* NSString+Extension.m */; };
+		82C83BCF1CE20456003F832D /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C83BCD1CE20456003F832D /* UIView+Extension.m */; };
 		82CB4CEB1CAA233E00DCBBBE /* YTTrainDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CB4CEA1CAA233E00DCBBBE /* YTTrainDetailView.m */; };
 		82CB4CEE1CAA659900DCBBBE /* YTTrainStationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CB4CED1CAA659900DCBBBE /* YTTrainStationController.m */; };
 		82CB4CF21CAA7B9B00DCBBBE /* YTTrainStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CB4CF11CAA7B9B00DCBBBE /* YTTrainStation.m */; };
@@ -162,21 +163,19 @@
 		82239EFB1CA27FF100859C77 /* YTCookKindItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCookKindItemView.m; sourceTree = "<group>"; };
 		82239EFD1CA2A5C100859C77 /* YTDishCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTDishCell.h; sourceTree = "<group>"; };
 		82239EFE1CA2A5C100859C77 /* YTDishCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTDishCell.m; sourceTree = "<group>"; };
+		822AE67E1CE5F43400A2AEC3 /* UINavigationBar+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Extension.h"; sourceTree = "<group>"; };
+		822AE67F1CE5F43400A2AEC3 /* UINavigationBar+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Extension.m"; sourceTree = "<group>"; };
 		822B69821CB500E800927444 /* YTJoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTJoke.h; sourceTree = "<group>"; };
 		822B69831CB500E800927444 /* YTJoke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTJoke.m; sourceTree = "<group>"; };
 		822B69851CB5018B00927444 /* YTJokeListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTJokeListController.h; sourceTree = "<group>"; };
 		822B69861CB5018B00927444 /* YTJokeListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTJokeListController.m; sourceTree = "<group>"; };
 		822B69881CB5081F00927444 /* YTJokeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTJokeCell.h; sourceTree = "<group>"; };
 		822B69891CB5081F00927444 /* YTJokeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTJokeCell.m; sourceTree = "<group>"; };
-		822B698B1CB50EF100927444 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
-		822B698C1CB50EF100927444 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		822B69911CB640B700927444 /* YTHistoryEventDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTHistoryEventDetailController.h; sourceTree = "<group>"; };
 		822B69921CB640B700927444 /* YTHistoryEventDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTHistoryEventDetailController.m; sourceTree = "<group>"; };
 		822B69941CB6415A00927444 /* YTEventDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTEventDetail.h; sourceTree = "<group>"; };
 		822B69951CB6415A00927444 /* YTEventDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTEventDetail.m; sourceTree = "<group>"; };
 		822B699E1CB7972900927444 /* Province.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Province.plist; sourceTree = "<group>"; };
-		823E85771C9F9F8B00A3BCA0 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		823E85781C9F9F8B00A3BCA0 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		824E05B71CA99C8100C8BA4D /* YTTrainInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTrainInfoQuery.h; sourceTree = "<group>"; };
 		824E05B81CA99C8100C8BA4D /* YTTrainInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTrainInfoQuery.m; sourceTree = "<group>"; };
 		824E05BA1CA9A35F00C8BA4D /* YTTrainQueryItemBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTrainQueryItemBtn.h; sourceTree = "<group>"; };
@@ -291,6 +290,10 @@
 		829E29431CA421A300ADFB78 /* YTMenuContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMenuContentView.m; sourceTree = "<group>"; };
 		82BAF8061CABC91600124A8C /* YTExpressageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTExpressageController.h; sourceTree = "<group>"; };
 		82BAF8071CABC91600124A8C /* YTExpressageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTExpressageController.m; sourceTree = "<group>"; };
+		82C83BCA1CE20456003F832D /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		82C83BCB1CE20456003F832D /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		82C83BCC1CE20456003F832D /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		82C83BCD1CE20456003F832D /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		82CB4CE91CAA233E00DCBBBE /* YTTrainDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTrainDetailView.h; sourceTree = "<group>"; };
 		82CB4CEA1CAA233E00DCBBBE /* YTTrainDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTrainDetailView.m; sourceTree = "<group>"; };
 		82CB4CEC1CAA659900DCBBBE /* YTTrainStationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTrainStationController.h; sourceTree = "<group>"; };
@@ -501,10 +504,10 @@
 		821E6EDE1C9667A2006F49D5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				82557DD51CBFB77A003408FE /* Tools */,
-				829E29311CA4049000ADFB78 /* Query */,
-				8282F9BE1CA13264008DC02A /* Life */,
-				82DA21A71C9BA3CF00108B39 /* HomePage */,
+				82557DD51CBFB77A003408FE /* Tools（工具） */,
+				829E29311CA4049000ADFB78 /* Query（查询） */,
+				8282F9BE1CA13264008DC02A /* Life（生活） */,
+				82DA21A71C9BA3CF00108B39 /* HomePage（主页） */,
 				821E6EE91C96B47A006F49D5 /* Main */,
 				821691251CBCF54D00D60EAD /* Setting */,
 				821E6EE01C9667A2006F49D5 /* Others */,
@@ -519,10 +522,6 @@
 			children = (
 				82DFEC771CBBC6B500F37D45 /* Weather */,
 				828140DF1CA5172E002BC47C /* ZFCalendar */,
-				823E85771C9F9F8B00A3BCA0 /* UIView+Extension.h */,
-				823E85781C9F9F8B00A3BCA0 /* UIView+Extension.m */,
-				822B698B1CB50EF100927444 /* NSString+Extension.h */,
-				822B698C1CB50EF100927444 /* NSString+Extension.m */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
@@ -539,6 +538,7 @@
 		821E6EE91C96B47A006F49D5 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				82C83BC91CE20428003F832D /* Category */,
 				82557E191CBFBB7D003408FE /* Views */,
 				8282F9B31CA12742008DC02A /* Tools */,
 			);
@@ -582,7 +582,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		82557DD51CBFB77A003408FE /* Tools */ = {
+		82557DD51CBFB77A003408FE /* Tools（工具） */ = {
 			isa = PBXGroup;
 			children = (
 				82557DD61CBFB841003408FE /* Dream */,
@@ -590,6 +590,7 @@
 				82557DEE1CBFB842003408FE /* Interpret */,
 				82557DFA1CBFB842003408FE /* PostCode */,
 			);
+			name = "Tools（工具）";
 			path = Tools;
 			sourceTree = "<group>";
 		};
@@ -927,7 +928,7 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
-		8282F9BE1CA13264008DC02A /* Life */ = {
+		8282F9BE1CA13264008DC02A /* Life（生活） */ = {
 			isa = PBXGroup;
 			children = (
 				822B697E1CB4FFE100927444 /* Joke */,
@@ -935,6 +936,7 @@
 				8267AFE71CB3CB7A004248BE /* HistoryToday */,
 				8282F9BF1CA13399008DC02A /* Cookbook */,
 			);
+			name = "Life（生活）";
 			path = Life;
 			sourceTree = "<group>";
 		};
@@ -987,13 +989,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		829E29311CA4049000ADFB78 /* Query */ = {
+		829E29311CA4049000ADFB78 /* Query（查询） */ = {
 			isa = PBXGroup;
 			children = (
 				827F59A31CB4AF7600E3C15A /* Bus */,
 				82BAF8021CABC8F800124A8C /* Expressage */,
 				829E29321CA4053700ADFB78 /* Train */,
 			);
+			name = "Query（查询）";
 			path = Query;
 			sourceTree = "<group>";
 		};
@@ -1093,13 +1096,27 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		82DA21A71C9BA3CF00108B39 /* HomePage */ = {
+		82C83BC91CE20428003F832D /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				822AE67E1CE5F43400A2AEC3 /* UINavigationBar+Extension.h */,
+				822AE67F1CE5F43400A2AEC3 /* UINavigationBar+Extension.m */,
+				82C83BCA1CE20456003F832D /* NSString+Extension.h */,
+				82C83BCB1CE20456003F832D /* NSString+Extension.m */,
+				82C83BCC1CE20456003F832D /* UIView+Extension.h */,
+				82C83BCD1CE20456003F832D /* UIView+Extension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		82DA21A71C9BA3CF00108B39 /* HomePage（主页） */ = {
 			isa = PBXGroup;
 			children = (
 				82DA21A81C9BA3CF00108B39 /* Controller */,
 				82DA21AB1C9BA3CF00108B39 /* Model */,
 				82DA21AC1C9BA3CF00108B39 /* View */,
 			);
+			name = "HomePage（主页）";
 			path = HomePage;
 			sourceTree = "<group>";
 		};
@@ -1454,6 +1471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82557E101CBFB842003408FE /* YTChoiceLanguageBtn.m in Sources */,
+				822AE6801CE5F43400A2AEC3 /* UINavigationBar+Extension.m in Sources */,
 				82E534FF1CA2FF5500DBB058 /* YTCookListController.m in Sources */,
 				82DFED371CBBC72700F37D45 /* JSONModel+networking.m in Sources */,
 				82DFED351CBBC72700F37D45 /* JSONAPI.m in Sources */,
@@ -1470,7 +1488,6 @@
 				8282F9CE1CA156A2008DC02A /* YTCookDetail.m in Sources */,
 				827F59B61CB4DDC600E3C15A /* YTChannelListController.m in Sources */,
 				82239EF91CA27FD900859C77 /* YTCookKindView.m in Sources */,
-				822B698D1CB50EF100927444 /* NSString+Extension.m in Sources */,
 				829E293E1CA41BEE00ADFB78 /* YTTrainInfoQueryController.m in Sources */,
 				82557E141CBFB842003408FE /* YTProvince.m in Sources */,
 				822B69871CB5018B00927444 /* YTJokeListController.m in Sources */,
@@ -1503,6 +1520,7 @@
 				827F59B31CB4BA4C00E3C15A /* YTTVShow.m in Sources */,
 				82DFED331CBBC72700F37D45 /* JSONModelError.m in Sources */,
 				822B69841CB500E800927444 /* YTJoke.m in Sources */,
+				82C83BCF1CE20456003F832D /* UIView+Extension.m in Sources */,
 				8212F69A1CB56101005CB9BF /* YTHistoryEventListController.m in Sources */,
 				82557E151CBFB842003408FE /* YTAddressPickerView.m in Sources */,
 				82DA21B01C9BA3EB00108B39 /* YTRoundView.m in Sources */,
@@ -1532,7 +1550,6 @@
 				828140FA1CA5172E002BC47C /* NSDate+WQCalendarLogic.m in Sources */,
 				82239EFC1CA27FF100859C77 /* YTCookKindItemView.m in Sources */,
 				82557E081CBFB842003408FE /* YTDream.m in Sources */,
-				823E85791C9F9F8B00A3BCA0 /* UIView+Extension.m in Sources */,
 				82557E0E1CBFB842003408FE /* YTInterpretController.m in Sources */,
 				82DFED571CBBD4D000F37D45 /* YTBusQueryController.m in Sources */,
 				828141051CA91301002BC47C /* YTTrain.m in Sources */,
@@ -1550,6 +1567,7 @@
 				82DFED661CBBD9EA00F37D45 /* YTBusStationController.m in Sources */,
 				8216912B1CBCF5F100D60EAD /* YTSettingController.m in Sources */,
 				8267AFED1CB3CBEA004248BE /* YTHistoryEvent.m in Sources */,
+				82C83BCE1CE20456003F832D /* NSString+Extension.m in Sources */,
 				82DFED391CBBC72700F37D45 /* JSONValueTransformer.m in Sources */,
 				8281410B1CA9198D002BC47C /* YTTrainHeaderView.m in Sources */,
 				82DFED3E1CBBC72700F37D45 /* WZForecastTableViewCell.m in Sources */,
